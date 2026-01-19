@@ -1,0 +1,17 @@
+{
+  "app": {
+    "name": "RegisterApp"
+  },
+  "menu": {
+    "home": "Inicio",
+    "settings": "Configuración",
+    "help": "Ayuda"
+  },
+  "home": {
+    "title": "Bienvenido a RegisterApp"
+  },
+  "settings": {
+    "title": "Configuración",
+    "language": "Idioma"
+  }
+}

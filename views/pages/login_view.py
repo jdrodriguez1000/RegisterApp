@@ -61,6 +61,7 @@ class LoginView:
 
     def render(self):
         self.page.theme_mode = ft.ThemeMode.LIGHT
+        self.page.theme = None # Reset theme to default to avoid artifacts from other views
         self.page.update()
         
         content = ft.Stack(

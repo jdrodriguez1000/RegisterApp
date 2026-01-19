@@ -21,7 +21,7 @@ class RegisterView:
             focused_border_color="#121212",
             color="black",
             label_style=ft.TextStyle(color="black", weight="bold"),
-            text_style=ft.TextStyle(color="black"),
+            text_style=ft.TextStyle(color="black", weight="bold"),
             cursor_color="black",
             prefix=ft.Icon(ft.Icons.PERSON_OUTLINE, color="black"),
         )
@@ -35,7 +35,7 @@ class RegisterView:
             focused_border_color="#121212",
             color="black",
             label_style=ft.TextStyle(color="black", weight="bold"),
-            text_style=ft.TextStyle(color="black"),
+            text_style=ft.TextStyle(color="black", weight="bold"),
             cursor_color="black",
             prefix=ft.Icon(ft.Icons.EMAIL_OUTLINED, color="black"),
             keyboard_type=ft.KeyboardType.EMAIL,
@@ -51,7 +51,7 @@ class RegisterView:
             focused_border_color="#121212",
             color="black",
             label_style=ft.TextStyle(color="black", weight="bold"),
-            text_style=ft.TextStyle(color="black"),
+            text_style=ft.TextStyle(color="black", weight="bold"),
             cursor_color="black",
             prefix=ft.Icon(ft.Icons.LOCK_OUTLINED, color="black"),
         )

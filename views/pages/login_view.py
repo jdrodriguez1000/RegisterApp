@@ -91,8 +91,7 @@ class LoginView:
                                         ft.Text(
                                             I18n.t("login.subtitle"),
                                             size=14,
-                                            color="#121212", # Casi negro para máxima claridad
-                                            weight="w500",
+                                            color="#2D2D2D", # Mas oscuro
                                         ),
                                         ft.Container(height=20),
                                         self.email_input,
@@ -101,7 +100,7 @@ class LoginView:
                                         ft.Container(
                                             content=ft.TextButton(
                                                 I18n.t("login.forgot_password"),
-                                                style=ft.ButtonStyle(color="#0747A6"), # Azul profesional profundo
+                                                style=ft.ButtonStyle(color="#444444"), # Mas oscuro
                                             ),
                                             alignment=ft.Alignment(1, 0),
                                         ),
@@ -128,10 +127,9 @@ class LoginView:
                                         # Footer Link
                                         ft.Row(
                                             controls=[
-                                                ft.Text(I18n.t("login.no_account"), color="#121212"), # Casi negro
+                                                ft.Text(I18n.t("login.no_account"), color="#2D2D2D"), # Mas oscuro
                                                 ft.TextButton(
                                                     I18n.t("login.join_us"),
-                                                    style=ft.ButtonStyle(color="#0747A6"), # Azul profesional profundo
                                                     on_click=lambda _: self.router.navigate("/register"),
                                                 ),
                                             ],

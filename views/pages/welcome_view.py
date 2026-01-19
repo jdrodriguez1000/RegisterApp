@@ -36,7 +36,6 @@ class WelcomeView:
                                             weight="bold",
                                             color="#1A1A1A",
                                             text_align="center",
-                                            letter_spacing=1,
                                         ),
                                         ft.Container(height=15),
                                         ft.Text(

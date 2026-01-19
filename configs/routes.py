@@ -5,9 +5,17 @@ import importlib
 ROUTES = [
     {
         "path": "/",
+        "view": "views.pages.welcome_view.WelcomeView",
+        "label": "welcome.title",
+        "icon": ft.Icons.START,
+        "show_in_top": False,
+        "show_in_bottom": False,
+    },
+    {
+        "path": "/dashboard",
         "view": "views.pages.home_view.HomeView",
         "label": "menu.home",
-        "icon": ft.Icons.HOME,
+        "icon": ft.Icons.DASHBOARD,
         "show_in_top": True,
         "show_in_bottom": True,
     },

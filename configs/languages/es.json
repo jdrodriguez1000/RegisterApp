@@ -7,6 +7,11 @@
     "settings": "Configuración",
     "help": "Ayuda"
   },
+  "welcome": {
+    "title": "Bienvenido a RegisterApp",
+    "subtitle": "La forma más segura y rápida de gestionar tu registro digital.",
+    "button": "Comenzar ahora"
+  },
   "home": {
     "title": "Bienvenido a RegisterApp"
   },

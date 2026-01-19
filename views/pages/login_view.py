@@ -56,7 +56,10 @@ class LoginView:
             border_radius=10,
             alignment=ft.Alignment(0, 0),
             visible=False,
-            margin=ft.Margin(20, 0, 20, 20),
+            # Positioning for direct usage in Stack
+            left=20,
+            right=20,
+            bottom=20,
             shadow=ft.BoxShadow(blur_radius=10, color=ft.Colors.with_opacity(0.3, "black")),
         )
 
@@ -203,10 +206,8 @@ class LoginView:
                     expand=True,
                 ),
                 # Custom SnackBar Overlay
-                ft.Container(
-                    content=self.snack_container,
-                    alignment=ft.Alignment(0, 1),
-                ),
+                # Custom SnackBar Control (Directly in Stack, invisible by default)
+                self.snack_container,
             ],
             expand=True,
         )

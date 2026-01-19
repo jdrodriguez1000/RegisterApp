@@ -20,6 +20,8 @@ class LoginView:
             border_color="#E0E0E0",
             focused_border_color="#121212",
             color="#1A1A1A",
+            label_style=ft.TextStyle(color="#2D2D2D"),
+            hint_style=ft.TextStyle(color="#BCBCBC"),
             prefix_icon=ft.Icons.EMAIL_OUTLINED,
             keyboard_type=ft.KeyboardType.EMAIL,
         )
@@ -33,6 +35,8 @@ class LoginView:
             border_color="#E0E0E0",
             focused_border_color="#121212",
             color="#1A1A1A",
+            label_style=ft.TextStyle(color="#2D2D2D"),
+            hint_style=ft.TextStyle(color="#BCBCBC"),
             prefix_icon=ft.Icons.LOCK_OUTLINED,
         )
         
@@ -87,7 +91,7 @@ class LoginView:
                                         ft.Text(
                                             I18n.t("login.subtitle"),
                                             size=14,
-                                            color="#757575",
+                                            color="#2D2D2D", # Mas oscuro
                                         ),
                                         ft.Container(height=20),
                                         self.email_input,
@@ -96,7 +100,7 @@ class LoginView:
                                         ft.Container(
                                             content=ft.TextButton(
                                                 I18n.t("login.forgot_password"),
-                                                style=ft.ButtonStyle(color="#757575"),
+                                                style=ft.ButtonStyle(color="#444444"), # Mas oscuro
                                             ),
                                             alignment=ft.Alignment(1, 0),
                                         ),
@@ -123,7 +127,7 @@ class LoginView:
                                         # Footer Link
                                         ft.Row(
                                             controls=[
-                                                ft.Text(I18n.t("login.no_account"), color="#757575"),
+                                                ft.Text(I18n.t("login.no_account"), color="#2D2D2D"), # Mas oscuro
                                                 ft.TextButton(
                                                     I18n.t("login.join_us"),
                                                     on_click=lambda _: self.router.navigate("/register"),
@@ -134,9 +138,16 @@ class LoginView:
                                     ],
                                     spacing=0,
                                 ),
-                                bgcolor="rgba(255, 255, 255, 0.9)", 
+                                bgcolor="white", # Opaco para contraste
                                 padding=ft.Padding(30, 30, 30, 30),
                                 border_radius=24,
+                                # Sombra para resaltar
+                                shadow=ft.BoxShadow(
+                                    spread_radius=1,
+                                    blur_radius=15,
+                                    color=ft.colors.with_opacity(0.1, "black"),
+                                    offset=ft.Offset(0, 5),
+                                ),
                                 margin=ft.Margin(20, 0, 20, 0),
                             ),
                         ],

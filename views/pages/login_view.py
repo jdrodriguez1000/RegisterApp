@@ -98,7 +98,7 @@ class LoginView:
                                         ),
                                         ft.Text(
                                             I18n.t("login.subtitle"),
-                                            size=13, # Bajado un punto
+                                            size=12, # Reducido un punto más
                                             color="#1A1A1A",
                                             weight="w500",
                                         ),
@@ -111,6 +111,7 @@ class LoginView:
                                                 content=ft.Text(
                                                     I18n.t("login.forgot_password"),
                                                     color="#1E88E5",
+                                                    size=13, # Tamaño ajustado
                                                     weight="bold", # Mismo formato que Unete a nosotros
                                                 ),
                                                 on_click=lambda _: self.router.navigate("/construction"),
@@ -149,6 +150,7 @@ class LoginView:
                                                     content=ft.Text(
                                                         I18n.t("login.join_us"),
                                                         color="#1E88E5",
+                                                        size=13, # Tamaño ajustado
                                                         weight="bold",
                                                     ),
                                                     on_click=lambda _: self.router.navigate("/register"),

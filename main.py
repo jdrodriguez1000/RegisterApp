@@ -12,8 +12,13 @@ def main(page: ft.Page):
         page.assets_dir = "assets"
         page.title = "RegisterApp"
         # Configurar icono (favicon.ico en la carpeta assets)
-        # Nota: Flet busca en assets_dir automáticamente si se indica la ruta relativa
         page.window.icon = "favicon.ico" 
+
+        # FUENTES
+        page.fonts = {
+            "Outfit": "https://github.com/google/fonts/raw/main/ofl/outfit/Outfit%5Bwght%5D.ttf"
+        }
+        page.theme = ft.Theme(font_family="Outfit")
 
         if page.platform in (ft.PagePlatform.WINDOWS, ft.PagePlatform.LINUX, ft.PagePlatform.MACOS):
             from core.app import FletingApp

@@ -21,9 +21,9 @@ class LoginView:
             focused_border_color="black",
             color="black",
             cursor_color="black",
-            label_style=ft.TextStyle(color="black", weight="bold"),
+            label_style=ft.TextStyle(color="black", weight=ft.FontWeight.W_500),
             hint_style=ft.TextStyle(color="#BCBCBC"),
-            text_style=ft.TextStyle(color="black", weight="bold"),
+            text_style=ft.TextStyle(color="black"),
             prefix=ft.Icon(ft.Icons.EMAIL_OUTLINED, color="black"),
             keyboard_type=ft.KeyboardType.EMAIL,
         )
@@ -38,9 +38,9 @@ class LoginView:
             focused_border_color="black",
             color="black",
             cursor_color="black",
-            label_style=ft.TextStyle(color="black", weight="bold"),
+            label_style=ft.TextStyle(color="black", weight=ft.FontWeight.W_500),
             hint_style=ft.TextStyle(color="#BCBCBC"),
-            text_style=ft.TextStyle(color="black", weight="bold"),
+            text_style=ft.TextStyle(color="black"),
             prefix=ft.Icon(ft.Icons.LOCK_OUTLINED, color="black"),
         )
         

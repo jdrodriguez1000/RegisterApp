@@ -86,7 +86,7 @@ class RegisterView:
             self.router.navigate("/verification-pending")
         else:
             # Show Custom SnackBar
-            msg = self.model.error_message
+            msg = self.model.error_message or "Error desconocido"
             self.snack_text.value = I18n.t(msg) if "error" in msg else msg
             
             self.snack_container.visible = True
@@ -148,7 +148,9 @@ class RegisterView:
                                         ft.Container(height=10),
                                         self.password_input,
                                         ft.Container(height=10),
-                                        self.error_text,
+                                        ft.Container(height=10),
+                                        # error_text removed
+                                        ft.Container(height=10),
                                         ft.Container(height=10),
                                         # Register Button
                                         ft.Button(

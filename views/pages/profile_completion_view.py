@@ -97,8 +97,18 @@ class ProfileCompletionView:
             self.error_text.update()
 
     def render(self):
-        # Ensure Light Mode
+        # Ensure Light Mode & High Contrast Theme for Dropdowns
         self.page.theme_mode = ft.ThemeMode.LIGHT
+        self.page.theme = ft.Theme(
+            color_scheme=ft.ColorScheme(
+                primary="black",
+                on_primary="white",
+                surface="white",
+                on_surface="black", # Text on dropdown menu
+                background="white",
+                on_background="black",
+            )
+        )
         self.page.update()
         
         content = ft.Stack(

@@ -46,6 +46,19 @@ class LoginView:
         
         
         # self.error_text removed
+        
+        # Custom SnackBar controls
+        self.snack_text = ft.Text("", color="white")
+        self.snack_container = ft.Container(
+            content=self.snack_text,
+            bgcolor=ft.Colors.ERROR,
+            padding=15,
+            border_radius=10,
+            alignment=ft.alignment.center,
+            visible=False,
+            margin=ft.Margin(20, 0, 20, 20),
+            shadow=ft.BoxShadow(blur_radius=10, color=ft.Colors.with_opacity(0.3, "black")),
+        )
 
     async def _on_login_click(self, e):
         route = await self.controller.handle_login(
@@ -57,14 +70,17 @@ class LoginView:
         if route:
             self.router.navigate(route)
         else:
-            # Show SnackBar instead of Text
-            print(f"DEBUG: Showing SnackBar with error: {self.controller.model.error_message}")
-            self.page.snack_bar = ft.SnackBar(
-                content=ft.Text(self.controller.model.error_message or "Error desconocido", color="white"),
-                bgcolor=ft.Colors.ERROR,
-            )
-            self.page.snack_bar.open = True
-            self.page.update()
+            # Show Custom SnackBar
+            print(f"DEBUG: Showing Custom SnackBar with error: {self.controller.model.error_message}")
+            self.snack_text.value = self.controller.model.error_message or "Error desconocido"
+            self.snack_container.visible = True
+            self.snack_container.update()
+            
+            # Hide after 3 seconds
+            import asyncio
+            await asyncio.sleep(3)
+            self.snack_container.visible = False
+            self.snack_container.update()
 
     def render(self):
         self.page.theme_mode = ft.ThemeMode.LIGHT
@@ -185,6 +201,12 @@ class LoginView:
                         horizontal_alignment="center",
                     ),
                     expand=True,
+                ),
+                ),
+                # Custom SnackBar Overlay
+                ft.Container(
+                    content=self.snack_container,
+                    alignment=ft.alignment.bottom_center,
                 ),
             ],
             expand=True,

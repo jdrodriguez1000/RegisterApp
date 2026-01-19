@@ -202,7 +202,6 @@ class LoginView:
                     ),
                     expand=True,
                 ),
-                ),
                 # Custom SnackBar Overlay
                 ft.Container(
                     content=self.snack_container,

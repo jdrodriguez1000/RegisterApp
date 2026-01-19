@@ -69,8 +69,6 @@ class ProfileCompletionView:
         # DatePicker setup
         self.date_picker = ft.DatePicker(
             on_change=self._on_date_change,
-            first_date=datetime.datetime(1900, 1, 1),
-            last_date=datetime.datetime.now(),
         )
         
     def _open_date_picker(self, e):

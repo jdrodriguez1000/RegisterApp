@@ -48,48 +48,48 @@ class ProfileCompletionView:
             **field_style
         )
         
-        # Date Input (TextField + DatePicker logic)
+        # Date Input (TextField - Manual entry to avoid Windows DatePicker issues)
         self.date_input = ft.TextField(
             label="Fecha de Nacimiento",
-            read_only=True,
-            icon=ft.Icons.CALENDAR_TODAY, # Note: Icon outside or prefix? User liked prefix in login. 
-            # TextField supports prefix_icon.
-            prefix_icon=ft.Icons.CALENDAR_MONTH,
-            on_click=self._open_date_picker,
-            # Validation: cursor_color needs to be black
+            hint_text="DD/MM/AAAA",
+            read_only=False, # Allow manual typing
+            hint_style=ft.TextStyle(color="#BCBCBC"),
             cursor_color="black",
             **field_style
         )
-        # Override icon color to black for premium look
+        # Icon styling
         self.date_input.prefix = ft.Icon(ft.Icons.CALENDAR_MONTH, color="black")
-        self.date_input.prefix_icon = None # Remove standard property to use custom prefix
 
         self.error_text = ft.Text("", color="red", size=14, text_align="center")
         
-        # DatePicker setup
-        self.date_picker = ft.DatePicker(
-            on_change=self._on_date_change,
-        )
-        
-    def _open_date_picker(self, e):
-        # Open the date picker using pick_date() which works with overlay
-        self.date_picker.pick_date()
-
-    def _on_date_change(self, e):
-        if self.date_picker.value:
-            self.controller.model.birth_date = self.date_picker.value
-            self.date_input.value = self.date_picker.value.strftime("%d/%m/%Y")
-            self.date_input.update()
-
     def _sync_model(self):
         self.controller.model.gender = self.gender_dropdown.value
         self.controller.model.civil_status = self.civil_status_dropdown.value
         self.controller.model.favorite_color = self.color_dropdown.value
         self.controller.model.favorite_sport = self.sport_dropdown.value
-        # Date is synced in _on_date_change
+        
+        # Parse date manually
+        if self.date_input.value:
+            try:
+                # Expecting DD/MM/YYYY
+                date_str = self.date_input.value.strip()
+                self.controller.model.birth_date = datetime.datetime.strptime(date_str, "%d/%m/%Y")
+            except ValueError:
+                self.controller.error_message = "Formato de fecha inválido. Usa DD/MM/AAAA"
+                self.controller.model.birth_date = None # Invalid
+        else:
+             self.controller.model.birth_date = None
 
     async def _on_save_click(self, e):
+        self.controller.error_message = None # Reset
         self._sync_model()
+        
+        # If parsing failed already, show error
+        if self.controller.error_message:
+            self.error_text.value = self.controller.error_message
+            self.error_text.update()
+            return
+
         await self.controller.save_profile(self.page, self.router)
         if self.controller.error_message:
             self.error_text.value = self.controller.error_message
@@ -98,11 +98,6 @@ class ProfileCompletionView:
     def render(self):
         # Ensure Light Mode
         self.page.theme_mode = ft.ThemeMode.LIGHT
-        
-        # Add date picker to overlay if not present
-        if self.date_picker not in self.page.overlay:
-            self.page.overlay.append(self.date_picker)
-            
         self.page.update()
         
         content = ft.Stack(
@@ -146,7 +141,7 @@ class ProfileCompletionView:
                                     ft.Container(height=10),
                                     self.sport_dropdown,
                                     ft.Container(height=10),
-                                    self.date_input,
+                                    self.date_input, # Manual entry
                                     
                                     ft.Container(height=20),
                                     self.error_text,

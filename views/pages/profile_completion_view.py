@@ -11,49 +11,59 @@ class ProfileCompletionView:
         self.router = router
         self.controller = ProfileController()
         
+        # Shared Style for Fields
+        field_style = {
+            "bgcolor": "white",
+            "border_radius": 12,
+            "border_color": "#1A1A1A",
+            "focused_border_color": "black",
+            "color": "black",
+            "label_style": ft.TextStyle(color="black", weight="bold"),
+            "text_style": ft.TextStyle(color="black", weight="bold"),
+            "filled": True,
+        }
+
         # Controls
         self.gender_dropdown = ft.Dropdown(
             label="Género",
             options=[ft.dropdown.Option(g) for g in GENDERS],
-            border_radius=12,
-            filled=True,
-            bgcolor="white",
-        )
-        
-        self.date_input = ft.TextField(
-            label="Fecha de Nacimiento",
-            read_only=True,
-            icon=ft.Icons.CALENDAR_TODAY,
-            border_radius=12,
-            filled=True,
-            bgcolor="white",
-            on_click=self._open_date_picker
+            **field_style
         )
         
         self.civil_status_dropdown = ft.Dropdown(
             label="Estado Civil",
             options=[ft.dropdown.Option(s) for s in CIVIL_STATUSES],
-            border_radius=12,
-            filled=True,
-            bgcolor="white",
+            **field_style
         )
         
         self.color_dropdown = ft.Dropdown(
             label="Color Favorito",
             options=[ft.dropdown.Option(c) for c in COLORS],
-            border_radius=12,
-            filled=True,
-            bgcolor="white",
+            **field_style
         )
         
         self.sport_dropdown = ft.Dropdown(
             label="Deporte Favorito",
             options=[ft.dropdown.Option(s) for s in SPORTS],
-            border_radius=12,
-            filled=True,
-            bgcolor="white",
+            **field_style
         )
         
+        # Date Input (TextField + DatePicker logic)
+        self.date_input = ft.TextField(
+            label="Fecha de Nacimiento",
+            read_only=True,
+            icon=ft.Icons.CALENDAR_TODAY, # Note: Icon outside or prefix? User liked prefix in login. 
+            # TextField supports prefix_icon.
+            prefix_icon=ft.Icons.CALENDAR_MONTH,
+            on_click=self._open_date_picker,
+            # Validation: cursor_color needs to be black
+            cursor_color="black",
+            **field_style
+        )
+        # Override icon color to black for premium look
+        self.date_input.prefix = ft.Icon(ft.Icons.CALENDAR_MONTH, color="black")
+        self.date_input.prefix_icon = None # Remove standard property to use custom prefix
+
         self.error_text = ft.Text("", color="red", size=14, text_align="center")
         
         # DatePicker setup
@@ -63,15 +73,9 @@ class ProfileCompletionView:
             last_date=datetime.datetime.now(),
         )
         
-        # Attach DatePicker to page ONLY if not already attached (avoid duplications)
-        # Note: In Flet 0.80+, overlay is preferred, but date_picker is a property of page or overlay.
-        # We'll assign it to self.page.overlay or similar
-        # Actually page.dialog = ... or page.overlay.append...
-        # But 'page.date_picker' property logic: only one date picker at a time usually?
-        # We will add it to overlay in render.
-
     def _open_date_picker(self, e):
-        self.page.open(self.date_picker)
+        # Open the date picker using pick_date() which works with overlay
+        self.date_picker.pick_date()
 
     def _on_date_change(self, e):
         if self.date_picker.value:
@@ -96,6 +100,12 @@ class ProfileCompletionView:
     def render(self):
         # Ensure Light Mode
         self.page.theme_mode = ft.ThemeMode.LIGHT
+        
+        # Add date picker to overlay if not present
+        if self.date_picker not in self.page.overlay:
+            self.page.overlay.append(self.date_picker)
+            
+        self.page.update()
         
         content = ft.Stack(
             controls=[
@@ -129,15 +139,17 @@ class ProfileCompletionView:
                         ft.Container(
                             content=ft.Column(
                                 controls=[
+                                    # ORDER: Gender, Civil, Color, Sport, Date
                                     self.gender_dropdown,
-                                    ft.Container(height=10),
-                                    self.date_input,
                                     ft.Container(height=10),
                                     self.civil_status_dropdown,
                                     ft.Container(height=10),
                                     self.color_dropdown,
                                     ft.Container(height=10),
                                     self.sport_dropdown,
+                                    ft.Container(height=10),
+                                    self.date_input,
+                                    
                                     ft.Container(height=20),
                                     self.error_text,
                                     ft.Container(height=10),
@@ -153,6 +165,7 @@ class ProfileCompletionView:
                                         on_click=self._on_save_click,
                                     ),
                                 ],
+                                horizontal_alignment="center", # Center children
                             ),
                             bgcolor="white",
                             padding=30,
@@ -165,9 +178,10 @@ class ProfileCompletionView:
                             ),
                             margin=ft.Margin(20, 0, 20, 0),
                         ),
+                        ft.Container(height=20), # Bottom spacer
                     ],
                     horizontal_alignment="center",
-                    scroll=ft.ScrollMode.AUTO, # Enable scrolling for small screens
+                    scroll=ft.ScrollMode.AUTO,
                 ),
             ],
             expand=True,

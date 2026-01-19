@@ -12,6 +12,16 @@
     "subtitle": "We want to get to know you better. Create your profile today and discover an experience designed exclusively for you.",
     "button": "Get Started"
   },
+  "login": {
+    "title": "Welcome Back!",
+    "subtitle": "Enter your credentials to continue.",
+    "email_label": "Your email address",
+    "password_label": "Your password",
+    "login_button": "Sign In",
+    "no_account": "Don't have an account?",
+    "join_us": "Join us",
+    "forgot_password": "Forgot password?"
+  },
   "home": {
     "title": "Welcome to RegisterApp"
   },

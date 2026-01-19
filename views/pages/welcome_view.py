@@ -66,7 +66,7 @@ class WelcomeView:
                                         shape=ft.RoundedRectangleBorder(radius=15),
                                         padding=ft.Padding(25, 25, 25, 25),
                                     ),
-                                    on_click=lambda _: self.router.navigate("/register"),
+                                    on_click=lambda _: self.router.navigate("/login"),
                                     width=float("inf"),
                                 ),
                                 margin=ft.Margin(30, 0, 30, 60),

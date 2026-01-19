@@ -36,23 +36,27 @@ The first interaction the user has with the app. (Finalized 2026-01-19)
 
 ---
 
-## Phase 3: Major Event - User Registration & Verification
+## Phase 3: Major Event - Authentication & Access (Login) [IN PROGRESS 🏗️]
+The secure entry point and main navigation hub.
+
+### [Component] Auth Management
+#### [MODIFY] [views/pages/welcome_view.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/views/pages/welcome_view.py)
+- Change "Get Started" button destination to `/login`.
+#### [NEW] [views/pages/login_view.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/views/pages/login_view.py)
+- **Deliverable**: Secure login interface with Email and Password fields.
+- Include a link "Don't have an account? Join us" pointing to `/register`.
+
+---
+
+## Phase 4: Major Event - User Registration & Verification
 Ensuring only verified users can access the system.
 
 ### [Component] Registration Flow
 #### [NEW] [views/pages/register_view.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/views/pages/register_view.py)
 - Fields for Email, Password, and Full Name.
+- Include a link "Already have an account? Login" pointing to `/login`.
 #### [NEW] [views/pages/email_verification_pending_view.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/views/pages/email_verification_pending_view.py)
 - **Deliverable**: A screen blocking users until their email is confirmed.
-
----
-
-## Phase 4: Major Event - Authentication & Access
-The secure entry point.
-
-### [Component] Auth Management
-#### [NEW] [views/pages/login_view.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/views/pages/login_view.py)
-- **Deliverable**: Secure login interface.
 
 ---
 
@@ -100,7 +104,7 @@ End-to-end validation of the complete system.
 ### [Component] Testing & QA
 #### [Manual Verification]
 - **Deliverable**: Detailed report/log of all functional tests.
-- E2E flow: Welcome -> Register -> Verify Email -> Login -> Complete Profile -> Dashboard.
+- E2E flow: Welcome -> Login -> Register -> Verify Email -> Login -> Complete Profile -> Dashboard.
 - Edge cases: Invalid passwords, duplicate emails, unauthorized access attempts.
 - Security check: Verify RLS policies are active in Supabase.
 

@@ -12,6 +12,22 @@ ROUTES = [
         "show_in_bottom": False,
     },
     {
+        "path": "/login",
+        "view": "views.pages.login_view.LoginView",
+        "label": "login.title",
+        "icon": ft.Icons.LOGIN,
+        "show_in_top": False,
+        "show_in_bottom": False,
+    },
+    {
+        "path": "/register",
+        "view": "views.pages.home_view.HomeView", # Temporary redirect to home/dashboard
+        "label": "Register",
+        "icon": ft.Icons.APP_REGISTRATION,
+        "show_in_top": False,
+        "show_in_bottom": False,
+    },
+    {
         "path": "/dashboard",
         "view": "views.pages.home_view.HomeView",
         "label": "menu.home",

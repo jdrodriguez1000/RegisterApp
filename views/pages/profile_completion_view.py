@@ -44,7 +44,6 @@ class ProfileCompletionView:
             border_radius=12,
             filled=True,
             bgcolor="white",
-            prefix_icon=ft.Icons.COLOR_LENS,
         )
         
         self.sport_dropdown = ft.Dropdown(
@@ -53,7 +52,6 @@ class ProfileCompletionView:
             border_radius=12,
             filled=True,
             bgcolor="white",
-            prefix_icon=ft.Icons.SPORTS_SOCCER,
         )
         
         self.error_text = ft.Text("", color="red", size=14, text_align="center")

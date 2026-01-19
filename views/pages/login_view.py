@@ -90,8 +90,8 @@ class LoginView:
                                         ),
                                         ft.Text(
                                             I18n.t("login.subtitle"),
-                                            size=14,
-                                            color="#1A1A1A", # Un tono más fuerte para claridad
+                                            size=13, # Bajado un punto
+                                            color="#1A1A1A",
                                             weight="w500",
                                         ),
                                         ft.Container(height=20),
@@ -100,8 +100,11 @@ class LoginView:
                                         self.password_input,
                                         ft.Container(
                                             content=ft.TextButton(
-                                                I18n.t("login.forgot_password"),
-                                                style=ft.ButtonStyle(color="#1E88E5"), # Azul vibrante y profesional
+                                                content=ft.Text(
+                                                    I18n.t("login.forgot_password"),
+                                                    color="#1E88E5",
+                                                    weight="bold", # Mismo formato que Unete a nosotros
+                                                ),
                                             ),
                                             alignment=ft.Alignment(1, 0),
                                         ),
@@ -128,7 +131,11 @@ class LoginView:
                                         # Footer Link
                                         ft.Row(
                                             controls=[
-                                                ft.Text(I18n.t("login.no_account"), color="#1A1A1A"),
+                                                ft.Text(
+                                                    I18n.t("login.no_account"), 
+                                                    color="#1A1A1A",
+                                                    weight="w600", # Mas peso
+                                                ),
                                                 ft.TextButton(
                                                     content=ft.Text(
                                                         I18n.t("login.join_us"),

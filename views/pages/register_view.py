@@ -56,7 +56,23 @@ class RegisterView:
             prefix=ft.Icon(ft.Icons.LOCK_OUTLINED, color="black"),
         )
         
-        self.error_text = ft.Text("", color="red", size=14, text_align="center")
+        # self.error_text removed
+        
+        # Custom SnackBar controls
+        self.snack_text = ft.Text("", color="white")
+        self.snack_container = ft.Container(
+            content=self.snack_text,
+            bgcolor=ft.Colors.ERROR,
+            padding=15,
+            border_radius=10,
+            alignment=ft.Alignment(0, 0),
+            visible=False,
+            # Positioning for direct usage in Stack
+            left=20,
+            right=20,
+            bottom=20,
+            shadow=ft.BoxShadow(blur_radius=10, color=ft.Colors.with_opacity(0.3, "black")),
+        )
 
     async def _on_register_click(self, e):
         success = await self.controller.handle_register(
@@ -69,10 +85,18 @@ class RegisterView:
         if success:
             self.router.navigate("/verification-pending")
         else:
-            # Check if it's a translation key
+            # Show Custom SnackBar
             msg = self.model.error_message
-            self.error_text.value = I18n.t(msg) if "error" in msg else msg
-            self.page.update()
+            self.snack_text.value = I18n.t(msg) if "error" in msg else msg
+            
+            self.snack_container.visible = True
+            self.snack_container.update()
+            
+            # Hide after 3 seconds
+            import asyncio
+            await asyncio.sleep(3)
+            self.snack_container.visible = False
+            self.snack_container.update()
 
     def render(self):
         # FORCE LIGHT MODE for this view to ensure input text is visible
@@ -181,6 +205,8 @@ class RegisterView:
                     ),
                     expand=True,
                 ),
+                # Custom SnackBar Control (Directly in Stack, invisible by default)
+                self.snack_container,
             ],
             expand=True,
         )

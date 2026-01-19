@@ -1,5 +1,6 @@
 from models.login_model import LoginModel
 from core.logger import get_logger
+from core.database import supabase # Ensure this export exists in core/database.py
 
 logger = get_logger("LoginController")
 
@@ -23,12 +24,28 @@ class LoginController:
             return False
 
         try:
-            # Placeholder for Supabase Auth call
             logger.info(f"Attempting login for: {email}")
-            # router.navigate("/dashboard")
-            return True
+            
+            # Real Supabase Authentication
+            response = supabase.auth.sign_in_with_password({
+                "email": email,
+                "password": password
+            })
+            
+            # If successful, response.user and response.session should be populated
+            if response.user:
+                logger.info(f"Login successful for user: {response.user.id}")
+                return True
+            else:
+                self.model.error_message = "No user returned from authentication."
+                return False
+
         except Exception as e:
             logger.error(f"Login error: {str(e)}")
-            self.model.error_message = "Authentication failed"
+            # Improve error message handling based on Supabase exceptions if possible
+            if "Invalid login credentials" in str(e):
+                self.model.error_message = "Credenciales incorrectas"
+            else:
+                self.model.error_message = f"Error: {str(e)}"
             self.model.is_loading = False
             return False

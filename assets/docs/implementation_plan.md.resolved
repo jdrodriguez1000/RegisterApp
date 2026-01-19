@@ -1,0 +1,115 @@
+# Implementation Plan: User Registration App (Detailed Phases)
+
+This plan organizes the development into "Major Events" or deliverables to ensure a structured approach to building the application.
+
+## User Review Required
+
+> [!IMPORTANT]
+> **Mobile-Only Design**: The app will be locked to ~390x844px.
+> **Mandatory Flow**: Users cannot skip the email verification or the profile completion steps.
+
+---
+
+## Phase 1: Foundation & Core Logic
+Setup the backend and the essential micro-framework configuration.
+
+### [Component] Database & Security
+#### [NEW] `schema.sql`
+- Create `profiles` table and enable RLS.
+#### [MODIFY] [core/database.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/core/database.py)
+- Establish connection to Supabase.
+
+### [Component] App Configuration
+#### [MODIFY] [main.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/main.py)
+- Setup fixed window dimensions and Fleting initialization.
+#### [NEW] [configs/languages/](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/configs/languages/)
+- Initial `es.json` and `en.json` files.
+
+---
+
+## Phase 2: Major Event - Onboarding Experience
+The first interaction the user has with the app.
+
+### [Component] Onboarding UI
+#### [NEW] [views/pages/welcome_view.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/views/pages/welcome_view.py)
+- **Deliverable**: A premium welcome screen with "Get Started" button.
+
+---
+
+## Phase 3: Major Event - User Registration & Verification
+Ensuring only verified users can access the system.
+
+### [Component] Registration Flow
+#### [NEW] [views/pages/register_view.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/views/pages/register_view.py)
+- Fields for Email, Password, and Full Name.
+#### [NEW] [views/pages/email_verification_pending_view.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/views/pages/email_verification_pending_view.py)
+- **Deliverable**: A screen blocking users until their email is confirmed.
+
+---
+
+## Phase 4: Major Event - Authentication & Access
+The secure entry point.
+
+### [Component] Auth Management
+#### [NEW] [views/pages/login_view.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/views/pages/login_view.py)
+- **Deliverable**: Secure login interface.
+
+---
+
+## Phase 5: Major Event - Mandatory Profile Completion
+Capturing specific user details required for the application.
+
+### [Component] Profile Engine
+#### [MODIFY] [core/router.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/core/router.py)
+- Logic to reroute users to `profile_completion_view` if data is missing.
+#### [NEW] [views/pages/profile_completion_view.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/views/pages/profile_completion_view.py)
+- **Deliverable**: Forms for Gender, Birth Date, Civil Status, Favorite Color, and Sport.
+
+---
+
+## Phase 6: Major Event - User Dashboard
+The main workspace for the authenticated user.
+
+### [Component] Dashboard UI
+#### [NEW] [views/pages/dashboard_view.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/views/pages/dashboard_view.py)
+- **Deliverable**: Display of all profile information in a premium UI.
+
+---
+
+## Phase 7: Major Event - Secure Password Change
+Allowing users to update their credentials from within the app.
+
+### [Component] Password Internal Management
+#### [NEW] [views/pages/change_password_view.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/views/pages/change_password_view.py)
+- **Deliverable**: Secure password update screen (requires current password).
+
+---
+
+## Phase 8: Major Event - Password Recovery (External)
+Helping users regain access when they forget their password.
+
+### [Component] Recovery Flow
+#### [NEW] [views/pages/forgot_password_view.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/views/pages/forgot_password_view.py)
+- **Deliverable**: Flow for password recovery emails and reset interface.
+
+---
+
+## Phase 9: Major Event - Final Application Testing
+End-to-end validation of the complete system.
+
+### [Component] Testing & QA
+#### [Manual Verification]
+- **Deliverable**: Detailed report/log of all functional tests.
+- E2E flow: Welcome -> Register -> Verify Email -> Login -> Complete Profile -> Dashboard.
+- Edge cases: Invalid passwords, duplicate emails, unauthorized access attempts.
+- Security check: Verify RLS policies are active in Supabase.
+
+---
+
+## Verification Plan
+
+### Manual Verification (Per Phase Deliverable)
+1. **Phase 1-6**: Cumulative verification of standard flows.
+2. **Phase 7**: Verify successful password change and rejection of incorrect "current password".
+3. **Phase 8**: Verify recovery email is received and the link allows setting a new password.
+4. **Phase 9**: Final E2E test suite.

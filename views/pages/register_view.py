@@ -19,8 +19,8 @@ class RegisterView:
             border_radius=12,
             border_color="#E0E0E0",
             focused_border_color="#121212",
-            color="#1A1A1A",
-            label_style=ft.TextStyle(color="#1A1A1A"),
+            color="black", # Texto negro absoluto
+            label_style=ft.TextStyle(color="black", weight="bold"), # Etiqueta negra y negrita
             prefix_icon=ft.Icons.PERSON_OUTLINE,
         )
         
@@ -31,8 +31,8 @@ class RegisterView:
             border_radius=12,
             border_color="#E0E0E0",
             focused_border_color="#121212",
-            color="#1A1A1A",
-            label_style=ft.TextStyle(color="#1A1A1A"),
+            color="black", # Texto negro absoluto
+            label_style=ft.TextStyle(color="black", weight="bold"), # Etiqueta negra y negrita
             prefix_icon=ft.Icons.EMAIL_OUTLINED,
             keyboard_type=ft.KeyboardType.EMAIL,
         )
@@ -45,8 +45,8 @@ class RegisterView:
             border_radius=12,
             border_color="#E0E0E0",
             focused_border_color="#121212",
-            color="#1A1A1A",
-            label_style=ft.TextStyle(color="#1A1A1A"),
+            color="black", # Texto negro absoluto
+            label_style=ft.TextStyle(color="black", weight="bold"), # Etiqueta negra y negrita
             prefix_icon=ft.Icons.LOCK_OUTLINED,
         )
         

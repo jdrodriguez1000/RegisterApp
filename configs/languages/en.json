@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "Fleting"
+    "name": "RegisterApp"
   },
   "menu": {
     "home": "Home",
@@ -8,7 +8,7 @@
     "help": "Help"
   },
   "home": {
-    "title": "Wellcome to Fleting"
+    "title": "Welcome to RegisterApp"
   },
   "settings": {
     "title": "Configs",

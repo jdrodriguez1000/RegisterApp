@@ -1,63 +1,24 @@
 
+import os
+from supabase import create_client, Client
+from dotenv import load_dotenv
 
-import sqlite3
-# import mysql.connector  
-from configs.database import DATABASE
-from pathlib import Path
+load_dotenv()
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-_connection = None
+_supabase: Client = None
 
 def get_connection():
-    global _connection
+    global _supabase
 
-    if _connection is not None:
-        return _connection
+    if _supabase is not None:
+        return _supabase
 
-    engine = DATABASE.get("ENGINE", "sqlite").lower()
+    url = os.environ.get("SUPABASE_URL")
+    key = os.environ.get("SUPABASE_KEY")
 
-    if engine == "sqlite":
-        _connection = _connect_sqlite()
-    elif engine == "mysql":
-        _connection = _connect_mysql()
-    else:
-        raise RuntimeError(f"Unsupported database engine: {engine}")
+    if not url or not key:
+        raise RuntimeError("SUPABASE_URL and SUPABASE_KEY must be set in environment variables")
 
-    return _connection
-
-# =========================
-# SQLITE
-# =========================
-def _connect_sqlite():
-    cfg = DATABASE.get("SQLITE", {})
-    path_cfg = cfg.get("PATH", "data/fleting.db")
-
-    db_path = BASE_DIR / Path(path_cfg)
-    db_path.parent.mkdir(parents=True, exist_ok=True)
-
-    return sqlite3.connect(db_path)
-
-# =========================
-# MYSQL
-# =========================
-def _connect_mysql():
-    pass
-    # try:
-    #     import mysql.connector
-    # except ImportError:
-    #     raise RuntimeError(
-    #         "MySQL support requires `mysql-connector-python` :"
-    #         "pip install mysql-connector-python"
-    #     )
-
-    # cfg = DATABASE.get("MYSQL", {})
-
-    # return mysql.connector.connect(
-    #     host=cfg.get("HOST", "localhost"),
-    #     port=cfg.get("PORT", 3306),
-    #     user=cfg.get("USER"),
-    #     password=cfg.get("PASSWORD"),
-    #     database=cfg.get("NAME"),
-    #     charset=cfg.get("OPTIONS", {}).get("charset", "utf8mb4"),
-    # )
+    _supabase = create_client(url, key)
+    return _supabase
 

@@ -5,7 +5,7 @@ import flet as ft
 class ScreenConfig:
     MOBILE = {
         "width": 390,
-        "height": 758,
+        "height": 844,
         "max_content_width": 390,
     }
 

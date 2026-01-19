@@ -15,6 +15,9 @@ def main(page: ft.Page):
             from core.app import FletingApp
             page.window.width = AppConfig.DEFAULT_SCREEN["width"]
             page.window.height = AppConfig.DEFAULT_SCREEN["height"]
+            page.window.resizable = False
+            page.window.top = 50
+            page.window.left = 500 # Approximate center for initial view
 
         from core.i18n import I18n
         I18n.load("es")

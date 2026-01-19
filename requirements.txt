@@ -1,2 +1,4 @@
 flet
 fleting
+supabase
+python-dotenv

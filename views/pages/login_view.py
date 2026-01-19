@@ -130,8 +130,8 @@ class LoginView:
                                             controls=[
                                                 ft.Text(I18n.t("login.no_account"), color="#1A1A1A"),
                                                 ft.TextButton(
-                                                    I18n.t("login.join_us"),
-                                                    style=ft.ButtonStyle(
+                                                    content=ft.Text(
+                                                        I18n.t("login.join_us"),
                                                         color="#1E88E5",
                                                         weight="bold",
                                                     ),

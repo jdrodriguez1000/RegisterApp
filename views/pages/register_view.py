@@ -1,19 +1,31 @@
 import flet as ft
 from views.layouts.main_layout import MainLayout
-from controllers.login_controller import LoginController
-from models.login_model import LoginModel
+from controllers.register_controller import RegisterController
+from models.register_model import RegisterModel
 from core.i18n import I18n
 
-class LoginView:
+class RegisterView:
     def __init__(self, page, router):
         self.page = page
         self.router = router
-        self.model = LoginModel()
-        self.controller = LoginController(self.model)
+        self.model = RegisterModel()
+        self.controller = RegisterController(self.model)
         
-        # UI controls that need references
+        # UI controls
+        self.name_input = ft.TextField(
+            label=I18n.t("register.name_label"),
+            hint_text="John Doe",
+            bgcolor="white",
+            border_radius=12,
+            border_color="#E0E0E0",
+            focused_border_color="#121212",
+            color="#1A1A1A",
+            label_style=ft.TextStyle(color="#2D2D2D"),
+            prefix_icon=ft.Icons.PERSON_OUTLINE,
+        )
+        
         self.email_input = ft.TextField(
-            label=I18n.t("login.email_label"),
+            label=I18n.t("register.email_label"),
             hint_text="example@email.com",
             bgcolor="white",
             border_radius=12,
@@ -21,13 +33,12 @@ class LoginView:
             focused_border_color="#121212",
             color="#1A1A1A",
             label_style=ft.TextStyle(color="#2D2D2D"),
-            hint_style=ft.TextStyle(color="#BCBCBC"),
             prefix_icon=ft.Icons.EMAIL_OUTLINED,
             keyboard_type=ft.KeyboardType.EMAIL,
         )
         
         self.password_input = ft.TextField(
-            label=I18n.t("login.password_label"),
+            label=I18n.t("register.password_label"),
             password=True,
             can_reveal_password=True,
             bgcolor="white",
@@ -36,15 +47,26 @@ class LoginView:
             focused_border_color="#121212",
             color="#1A1A1A",
             label_style=ft.TextStyle(color="#2D2D2D"),
-            hint_style=ft.TextStyle(color="#BCBCBC"),
             prefix_icon=ft.Icons.LOCK_OUTLINED,
         )
         
         self.error_text = ft.Text("", color="red", size=14, text_align="center")
 
-    async def _on_login_click(self, e):
-        # TEMPORARY: Redirect to construction until Auth is fully integrated
-        self.router.navigate("/construction")
+    async def _on_register_click(self, e):
+        success = await self.controller.handle_register(
+            self.name_input.value,
+            self.email_input.value,
+            self.password_input.value,
+            self.page,
+            self.router
+        )
+        if success:
+            self.router.navigate("/verification-pending")
+        else:
+            # Check if it's a translation key
+            msg = self.model.error_message
+            self.error_text.value = I18n.t(msg) if "error" in msg else msg
+            self.page.update()
 
     def render(self):
         content = ft.Stack(
@@ -60,7 +82,7 @@ class LoginView:
                 ft.Container(
                     content=ft.Column(
                         controls=[
-                            ft.Container(height=80),
+                            ft.Container(height=40),
                             # Header
                             ft.Text(
                                 "RegisterApp",
@@ -68,45 +90,36 @@ class LoginView:
                                 weight="bold",
                                 color="#1A1A1A",
                             ),
-                            ft.Container(height=40),
-                            # Login Card
+                            ft.Container(height=20),
+                            # Register Card
                             ft.Container(
                                 content=ft.Column(
                                     controls=[
                                         ft.Text(
-                                            I18n.t("login.title"),
+                                            I18n.t("register.title"),
                                             size=24,
                                             weight="bold",
                                             color="#1A1A1A",
                                         ),
                                         ft.Text(
-                                            I18n.t("login.subtitle"),
-                                            size=13, # Bajado un punto
-                                            color="#1A1A1A",
+                                            I18n.t("register.subtitle"),
+                                            size=13,
+                                            color="#121212",
                                             weight="w500",
                                         ),
                                         ft.Container(height=20),
+                                        self.name_input,
+                                        ft.Container(height=10),
                                         self.email_input,
                                         ft.Container(height=10),
                                         self.password_input,
-                                        ft.Container(
-                                            content=ft.TextButton(
-                                                content=ft.Text(
-                                                    I18n.t("login.forgot_password"),
-                                                    color="#1E88E5",
-                                                    weight="bold", # Mismo formato que Unete a nosotros
-                                                ),
-                                                on_click=lambda _: self.router.navigate("/construction"),
-                                            ),
-                                            alignment=ft.Alignment(1, 0),
-                                        ),
                                         ft.Container(height=10),
                                         self.error_text,
                                         ft.Container(height=10),
-                                        # Login Button
+                                        # Register Button
                                         ft.Button(
                                             content=ft.Text(
-                                                I18n.t("login.login_button"),
+                                                I18n.t("register.register_button"),
                                                 color="white",
                                                 weight="bold",
                                                 size=16,
@@ -116,7 +129,7 @@ class LoginView:
                                                 shape=ft.RoundedRectangleBorder(radius=12),
                                                 padding=ft.Padding(20, 20, 20, 20),
                                             ),
-                                            on_click=self._on_login_click,
+                                            on_click=self._on_register_click,
                                             width=float("inf"),
                                         ),
                                         ft.Container(height=20),
@@ -124,17 +137,17 @@ class LoginView:
                                         ft.Row(
                                             controls=[
                                                 ft.Text(
-                                                    I18n.t("login.no_account"), 
+                                                    I18n.t("register.have_account"), 
                                                     color="#1A1A1A",
-                                                    weight="w600", # Mas peso
+                                                    weight="w600"
                                                 ),
                                                 ft.TextButton(
                                                     content=ft.Text(
-                                                        I18n.t("login.join_us"),
+                                                        I18n.t("register.login_now"),
                                                         color="#1E88E5",
                                                         weight="bold",
                                                     ),
-                                                    on_click=lambda _: self.router.navigate("/register"),
+                                                    on_click=lambda _: self.router.navigate("/login"),
                                                 ),
                                             ],
                                             alignment="center",
@@ -142,10 +155,9 @@ class LoginView:
                                     ],
                                     spacing=0,
                                 ),
-                                bgcolor="white", # Opaco para contraste
+                                bgcolor="white",
                                 padding=ft.Padding(30, 30, 30, 30),
                                 border_radius=24,
-                                # Sombra para resaltar
                                 shadow=ft.BoxShadow(
                                     spread_radius=1,
                                     blur_radius=15,

@@ -27,6 +27,26 @@
     "subtitle": "Estamos trabajando duro para ofrecerte esta funcionalidad. ¡Vuelva pronto!",
     "back_button": "Volver al Inicio"
   },
+  "register": {
+    "title": "Crea tu cuenta",
+    "subtitle": "Únete a nuestra comunidad y comienza tu experiencia digital hoy mismo.",
+    "name_label": "Nombre completo",
+    "email_label": "Correo electrónico",
+    "password_label": "Contraseña",
+    "register_button": "Registrarse",
+    "have_account": "¿Ya tienes una cuenta?",
+    "login_now": "Inicia sesión",
+    "error_empty": "Todos los campos son obligatorios",
+    "error_email": "Correo electrónico no válido",
+    "error_password": "La contraseña debe tener al menos 6 caracteres"
+  },
+  "verification": {
+    "title": "Verifica tu cuenta",
+    "subtitle": "Hemos enviado un enlace de confirmación a tu correo. Por favor, revísalo para activar tu identidad digital.",
+    "check_button": "Ya he verificado mi correo",
+    "resend_link": "¿No recibiste el correo? Enviar de nuevo",
+    "back_to_login": "Volver al login"
+  },
   "home": {
     "title": "Bienvenido a RegisterApp"
   },

@@ -27,6 +27,26 @@
     "subtitle": "We are working hard to bring you this feature. Please check back later!",
     "back_button": "Back to Home"
   },
+  "register": {
+    "title": "Create your account",
+    "subtitle": "Join our community and start your digital experience today.",
+    "name_label": "Full Name",
+    "email_label": "Email",
+    "password_label": "Password",
+    "register_button": "Register",
+    "have_account": "Already have an account?",
+    "login_now": "Login now",
+    "error_empty": "All fields are required",
+    "error_email": "Invalid email address",
+    "error_password": "Password must be at least 6 characters"
+  },
+  "verification": {
+    "title": "Verify your account",
+    "subtitle": "We have sent a confirmation link to your email. Please check it to activate your digital identity.",
+    "check_button": "I have verified my email",
+    "resend_link": "Didn't receive the email? Resend",
+    "back_to_login": "Back to login"
+  },
   "home": {
     "title": "Welcome to RegisterApp"
   },

@@ -29,9 +29,17 @@ ROUTES = [
     },
     {
         "path": "/register",
-        "view": "views.pages.home_view.HomeView", # Temporary redirect to home/dashboard
-        "label": "Register",
+        "view": "views.pages.register_view.RegisterView",
+        "label": "register.title",
         "icon": ft.Icons.APP_REGISTRATION,
+        "show_in_top": False,
+        "show_in_bottom": False,
+    },
+    {
+        "path": "/verification-pending",
+        "view": "views.pages.email_verification_pending_view.EmailVerificationPendingView",
+        "label": "verification.title",
+        "icon": ft.Icons.VERIFIED_USER,
         "show_in_top": False,
         "show_in_bottom": False,
     },

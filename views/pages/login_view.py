@@ -17,12 +17,14 @@ class LoginView:
             hint_text="example@email.com",
             bgcolor="white",
             border_radius=12,
-            border_color="#E0E0E0",
-            focused_border_color="#121212",
-            color="#1A1A1A",
-            label_style=ft.TextStyle(color="#2D2D2D"),
+            border_color="#1A1A1A",
+            focused_border_color="black",
+            color="black",
+            cursor_color="black",
+            label_style=ft.TextStyle(color="black", weight="bold"),
             hint_style=ft.TextStyle(color="#BCBCBC"),
-            prefix_icon=ft.Icons.EMAIL_OUTLINED,
+            text_style=ft.TextStyle(color="black", weight="bold"),
+            prefix=ft.Icon(ft.Icons.EMAIL_OUTLINED, color="black"),
             keyboard_type=ft.KeyboardType.EMAIL,
         )
         
@@ -32,12 +34,14 @@ class LoginView:
             can_reveal_password=True,
             bgcolor="white",
             border_radius=12,
-            border_color="#E0E0E0",
-            focused_border_color="#121212",
-            color="#1A1A1A",
-            label_style=ft.TextStyle(color="#2D2D2D"),
+            border_color="#1A1A1A",
+            focused_border_color="black",
+            color="black",
+            cursor_color="black",
+            label_style=ft.TextStyle(color="black", weight="bold"),
             hint_style=ft.TextStyle(color="#BCBCBC"),
-            prefix_icon=ft.Icons.LOCK_OUTLINED,
+            text_style=ft.TextStyle(color="black", weight="bold"),
+            prefix=ft.Icon(ft.Icons.LOCK_OUTLINED, color="black"),
         )
         
         self.error_text = ft.Text("", color="red", size=14, text_align="center")
@@ -56,6 +60,9 @@ class LoginView:
             self.error_text.update()
 
     def render(self):
+        self.page.theme_mode = ft.ThemeMode.LIGHT
+        self.page.update()
+        
         content = ft.Stack(
             controls=[
                 # BACKGROUND

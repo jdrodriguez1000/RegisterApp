@@ -58,9 +58,10 @@ class LoginView:
             self.router.navigate(route)
         else:
             # Show SnackBar instead of Text
+            print(f"DEBUG: Showing SnackBar with error: {self.controller.model.error_message}")
             self.page.snack_bar = ft.SnackBar(
                 content=ft.Text(self.controller.model.error_message or "Error desconocido", color="white"),
-                bgcolor="red",
+                bgcolor=ft.Colors.ERROR,
             )
             self.page.snack_bar.open = True
             self.page.update()

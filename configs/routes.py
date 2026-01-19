@@ -53,7 +53,7 @@ ROUTES = [
     },
     {
         "path": "/dashboard",
-        "view": "views.pages.home_view.HomeView",
+        "view": "views.pages.dashboard_view.DashboardView",
         "label": "menu.home",
         "icon": ft.Icons.DASHBOARD,
         "show_in_top": True,

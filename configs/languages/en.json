@@ -53,5 +53,20 @@
   "settings": {
     "title": "Configs",
     "language": "Language"
+  },
+  "dashboard": {
+    "welcome": "Welcome,",
+    "personal_info": "Personal Information",
+    "gender": "Gender",
+    "birth_date": "Birth Date",
+    "civil_status": "Civil Status",
+    "fav_color": "Favorite Color",
+    "fav_sport": "Favorite Sport",
+    "nav": {
+      "language": "Language",
+      "security": "Security",
+      "profile": "Profile",
+      "logout": "Logout"
+    }
   }
 }

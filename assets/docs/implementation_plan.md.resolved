@@ -73,12 +73,16 @@ Capturing specific user details required for the application.
 
 ---
 
-## Phase 6: Major Event - User Dashboard
-The main workspace for the authenticated user.
+## Phase 6: Major Event - User Dashboard [COMPLETED ✅]
+The main workspace for the authenticated user. (Finalized 2026-01-19)
 
 ### [Component] Dashboard UI
 #### [NEW] [views/pages/dashboard_view.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/views/pages/dashboard_view.py)
 - **Deliverable**: Display of all profile information in a premium UI.
+- [NEW] Bottom Navigation Bar with 3 items:
+  1. Language (Icon: Globe/Language) -> Redirects to `/construction` for now.
+  2. Password (Icon: Lock) -> Redirects to `/construction` for now.
+  3. Edit Profile (Icon: Edit/User) -> Redirects to `/construction` for now.
 
 ---
 
@@ -91,7 +95,27 @@ Allowing users to update their credentials from within the app.
 
 ---
 
-## Phase 8: Major Event - Password Recovery (External)
+## Phase 8: Major Event - Edit Profile
+Allowing users to modify their personal information.
+
+### [Component] Profile Management
+#### [NEW] [views/pages/edit_profile_view.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/views/pages/edit_profile_view.py)
+- **Deliverable**: Form pre-filled with existing data (Gender, Birth Date, Etc).
+- Logic to update the `profiles` table in Supabase.
+
+---
+
+## Phase 9: Major Event - Language Settings
+Allowing users to personalize the application language.
+
+### [Component] Internationalization
+#### [NEW] [views/pages/language_settings_view.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/views/pages/language_settings_view.py)
+- **Deliverable**: Selector for English/Spanish.
+- Updates the `app_language` state and persists user preference.
+
+---
+
+## Phase 10: Major Event - Password Recovery (External)
 Helping users regain access when they forget their password.
 
 ### [Component] Recovery Flow
@@ -100,7 +124,7 @@ Helping users regain access when they forget their password.
 
 ---
 
-## Phase 9: Major Event - Final Application Testing
+## Phase 11: Major Event - Final Application Testing
 End-to-end validation of the complete system.
 
 ### [Component] Testing & QA
@@ -117,5 +141,7 @@ End-to-end validation of the complete system.
 ### Manual Verification (Per Phase Deliverable)
 1. **Phase 1-6**: Cumulative verification of standard flows.
 2. **Phase 7**: Verify successful password change and rejection of incorrect "current password".
-3. **Phase 8**: Verify recovery email is received and the link allows setting a new password.
-4. **Phase 9**: Final E2E test suite.
+3. **Phase 8**: Verify profile updates reflect in Dashboard and Database.
+4. **Phase 9**: Verify language switch changes UI text immediately and persists on reload.
+5. **Phase 10**: Verify recovery email is received and the link allows setting a new password.
+6. **Phase 11**: Final E2E test suite.

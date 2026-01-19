@@ -1,0 +1,8 @@
+C:\Users\USUARIO\Documents\Proyectos\RegisterApp\main.py:45: DeprecationWarning: app() is deprecated since version 0.70.0. Use run() instead.
+  ft.app(target=main)
+2026-01-19 18:22:24,379 | INFO | flet | Assets path configured: C:\Users\USUARIO\Documents\Proyectos\RegisterApp\assets
+2026-01-19 18:22:24,380 | INFO | flet | Starting up TCP server on localhost:54626
+2026-01-19 18:22:24,386 | INFO | flet | Flet app has started...
+2026-01-19 18:22:24,705 | INFO | flet | App session started
+2026-01-19 18:22:24,708 | INFO | Router | Navigating to: /
+2026-01-19 18:22:24,718 | INFO | App | Aplicación iniciada con éxito

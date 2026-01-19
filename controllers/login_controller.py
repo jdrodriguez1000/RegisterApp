@@ -61,8 +61,8 @@ class LoginController:
                     logger.info("Profile incomplete. Redirecting to completion.")
                     return "/profile-completion"
                 else:
-                    logger.info("Profile complete. Redirecting to construction (Dashboard Phase pending).")
-                    return "/construction"
+                    logger.info("Profile complete. Redirecting to Dashboard.")
+                    return "/dashboard"
             else:
                 self.model.error_message = "No user returned from authentication."
                 return None

@@ -25,7 +25,7 @@ class UnderConstructionView:
                             # ICON WITH GLOW
                             ft.Container(
                                 content=ft.Icon(
-                                    name=ft.Icons.CONSTRUCTION_ROUNDED,
+                                    ft.Icons.CONSTRUCTION_ROUNDED,
                                     size=100,
                                     color="#1E88E5",
                                 ),

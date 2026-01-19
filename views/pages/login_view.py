@@ -43,17 +43,8 @@ class LoginView:
         self.error_text = ft.Text("", color="red", size=14, text_align="center")
 
     async def _on_login_click(self, e):
-        success = await self.controller.handle_login(
-            self.email_input.value,
-            self.password_input.value,
-            self.page,
-            self.router
-        )
-        if success:
-            self.router.navigate("/dashboard")
-        else:
-            self.error_text.value = self.model.error_message
-            self.page.update()
+        # TEMPORARY: Redirect to construction until Auth is fully integrated
+        self.router.navigate("/construction")
 
     def render(self):
         content = ft.Stack(

@@ -46,6 +46,7 @@ The secure entry point and main navigation hub.
 - **Deliverable**: Secure login interface with Email and Password fields.
 - Include a link "Don't have an account? Join us" pointing to `/register`.
 - [NEW] Temporary "Under Construction" view for placeholder links.
+- **Temporary Redirect**: The "Login" button will point to `/construction` until the Registration (Phase 4) is finished to avoid confusing testers.
 
 ---
 

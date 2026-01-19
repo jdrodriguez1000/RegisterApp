@@ -13,8 +13,8 @@
     "button": "Comenzar ahora"
   },
   "login": {
-    "title": "¡Bienvenido de nuevo!",
-    "subtitle": "Ingresa tus credenciales para continuar.",
+    "title": "Bienvenido",
+    "subtitle": "Ingresa tus credenciales",
     "email_label": "Tu correo electrónico",
     "password_label": "Tu contraseña",
     "login_button": "Iniciar Sesión",

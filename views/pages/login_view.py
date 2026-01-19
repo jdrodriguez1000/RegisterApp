@@ -156,7 +156,9 @@ class LoginView:
                                                     on_click=lambda _: self.router.navigate("/register"),
                                                 ),
                                             ],
+                                            ],
                                             alignment="center",
+                                            spacing=2, # Reducido espacio entre frase y link
                                         ),
                                     ],
                                     spacing=0,

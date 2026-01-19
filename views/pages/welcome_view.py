@@ -54,7 +54,7 @@ class WelcomeView:
                             ft.Container(expand=True),
                             # BUTTON AREA
                             ft.Container(
-                                content=ft.ElevatedButton(
+                                content=ft.Button(
                                     content=ft.Text(
                                         I18n.t("welcome.button"),
                                         color="white",

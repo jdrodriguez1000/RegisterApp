@@ -109,7 +109,7 @@ class LoginView:
                                         self.error_text,
                                         ft.Container(height=10),
                                         # Login Button
-                                        ft.ElevatedButton(
+                                        ft.Button(
                                             content=ft.Text(
                                                 I18n.t("login.login_button"),
                                                 color="white",

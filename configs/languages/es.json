@@ -45,7 +45,7 @@
     "subtitle": "Hemos enviado un enlace de confirmación a tu correo. Por favor, revísalo para activar tu identidad digital.",
     "check_button": "Ya he verificado mi correo",
     "resend_link": "¿No recibiste el correo? Enviar de nuevo",
-    "back_to_login": "Volver al login"
+    "back_to_login": "Volver al inicio"
   },
   "home": {
     "title": "Bienvenido a RegisterApp"

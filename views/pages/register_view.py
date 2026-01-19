@@ -23,7 +23,7 @@ class RegisterView:
             label_style=ft.TextStyle(color="black", weight="bold"),
             text_style=ft.TextStyle(color="black"),
             cursor_color="black",
-            prefix_icon=ft.Icons.PERSON_OUTLINE,
+            prefix=ft.Icon(ft.Icons.PERSON_OUTLINE, color="black"),
         )
         
         self.email_input = ft.TextField(
@@ -37,7 +37,7 @@ class RegisterView:
             label_style=ft.TextStyle(color="black", weight="bold"),
             text_style=ft.TextStyle(color="black"),
             cursor_color="black",
-            prefix_icon=ft.Icons.EMAIL_OUTLINED,
+            prefix=ft.Icon(ft.Icons.EMAIL_OUTLINED, color="black"),
             keyboard_type=ft.KeyboardType.EMAIL,
         )
         
@@ -53,7 +53,7 @@ class RegisterView:
             label_style=ft.TextStyle(color="black", weight="bold"),
             text_style=ft.TextStyle(color="black"),
             cursor_color="black",
-            prefix_icon=ft.Icons.LOCK_OUTLINED,
+            prefix=ft.Icon(ft.Icons.LOCK_OUTLINED, color="black"),
         )
         
         self.error_text = ft.Text("", color="red", size=14, text_align="center")
@@ -75,6 +75,10 @@ class RegisterView:
             self.page.update()
 
     def render(self):
+        # FORCE LIGHT MODE for this view to ensure input text is visible
+        self.page.theme_mode = ft.ThemeMode.LIGHT
+        self.page.update()
+
         content = ft.Stack(
             controls=[
                 # BACKGROUND

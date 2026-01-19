@@ -44,6 +44,14 @@ ROUTES = [
         "show_in_bottom": False,
     },
     {
+        "path": "/profile-completion",
+        "view": "views.pages.profile_completion_view.ProfileCompletionView",
+        "label": "Completar Perfil",
+        "icon": ft.Icons.PERSON,
+        "show_in_top": False,
+        "show_in_bottom": False,
+    },
+    {
         "path": "/dashboard",
         "view": "views.pages.home_view.HomeView",
         "label": "menu.home",

@@ -145,7 +145,7 @@ class LoginView:
                                 shadow=ft.BoxShadow(
                                     spread_radius=1,
                                     blur_radius=15,
-                                    color=ft.colors.with_opacity(0.1, "black"),
+                                    color=ft.Colors.with_opacity(0.1, "black"),
                                     offset=ft.Offset(0, 5),
                                 ),
                                 margin=ft.Margin(20, 0, 20, 0),

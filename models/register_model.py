@@ -1,4 +1,4 @@
-from core.database import supabase_client
+from core.database import supabase
 
 class RegisterModel:
     def __init__(self):

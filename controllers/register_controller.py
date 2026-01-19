@@ -1,4 +1,4 @@
-from core.database import supabase_client
+from core.database import supabase
 import logging
 
 logger = logging.getLogger(__name__)
@@ -29,7 +29,7 @@ class RegisterController:
         try:
             # 2. Supabase Auth (Cripta Segura)
             # We include the display name in user metadata for 'Identidad Digital'
-            response = supabase_client.auth.sign_up({
+            response = supabase.auth.sign_up({
                 "email": email,
                 "password": password,
                 "options": {

@@ -22,3 +22,6 @@ def get_connection():
     _supabase = create_client(url, key)
     return _supabase
 
+# Export for easy access
+supabase = get_connection()
+

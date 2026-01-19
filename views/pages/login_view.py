@@ -54,7 +54,7 @@ class LoginView:
             bgcolor=ft.Colors.ERROR,
             padding=15,
             border_radius=10,
-            alignment=ft.alignment.center,
+            alignment=ft.Alignment(0, 0),
             visible=False,
             margin=ft.Margin(20, 0, 20, 20),
             shadow=ft.BoxShadow(blur_radius=10, color=ft.Colors.with_opacity(0.3, "black")),
@@ -205,7 +205,7 @@ class LoginView:
                 # Custom SnackBar Overlay
                 ft.Container(
                     content=self.snack_container,
-                    alignment=ft.alignment.bottom_center,
+                    alignment=ft.Alignment(0, 1),
                 ),
             ],
             expand=True,

@@ -105,8 +105,6 @@ class ProfileCompletionView:
                 on_primary="white",
                 surface="white",
                 on_surface="black", # Text on dropdown menu
-                background="white",
-                on_background="black",
             )
         )
         self.page.update()

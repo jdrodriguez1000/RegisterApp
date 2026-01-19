@@ -12,52 +12,72 @@ class WelcomeView:
         self.controller = WelcomeController(self.model)
 
     def render(self):
-        content = ft.Container(
-            content=ft.Column(
-                controls=[
-                    ft.Container(
-                        content=ft.Image(
-                            src="img/welcome_hero.png",
-                            width=350,
-                            height=350,
-                            fit="contain",
-                        ),
-                        alignment=ft.Alignment(0, 0),
-                        margin=ft.Margin(0, 60, 0, 20),
-                    ),
-                    ft.Container(height=10),
-                    ft.Text(
-                        I18n.t("welcome.subtitle"),
-                        size=16,
-                        color="#757575",
-                        text_align="center",
-                    ),
-                    ft.Container(expand=True),
-                    ft.Container(
-                        content=ft.ElevatedButton(
-                            content=ft.Text(
-                                I18n.t("welcome.button"),
-                                color="white",
-                                weight="bold",
-                                size=16,
+        content = ft.Stack(
+            controls=[
+                # BACKGROUND IMAGE
+                ft.Image(
+                    src="img/welcome_bg.png",
+                    width=390,
+                    height=844,
+                    fit="cover",
+                ),
+                # CONTENT OVERLAY
+                ft.Container(
+                    content=ft.Column(
+                        controls=[
+                            ft.Container(expand=True),
+                            # TEXT AREA WITH GLASSMORPHISM FEEL
+                            ft.Container(
+                                content=ft.Column(
+                                    controls=[
+                                        ft.Text(
+                                            "RegisterApp",
+                                            size=44,
+                                            weight="bold",
+                                            color="#1A1A1A",
+                                            text_align="center",
+                                        ),
+                                        ft.Container(height=10),
+                                        ft.Text(
+                                            I18n.t("welcome.subtitle"),
+                                            size=18,
+                                            color="#4A4A4A",
+                                            text_align="center",
+                                            weight="w500",
+                                        ),
+                                    ],
+                                    horizontal_alignment="center",
+                                ),
+                                padding=ft.Padding(20, 0, 20, 0),
                             ),
-                            style=ft.ButtonStyle(
-                                bgcolor="#121212",
-                                shape=ft.RoundedRectangleBorder(radius=12),
-                                padding=ft.Padding(20, 20, 20, 20),
+                            ft.Container(expand=True),
+                            # BUTTON AREA
+                            ft.Container(
+                                content=ft.ElevatedButton(
+                                    content=ft.Text(
+                                        I18n.t("welcome.button"),
+                                        color="white",
+                                        weight="bold",
+                                        size=18,
+                                    ),
+                                    style=ft.ButtonStyle(
+                                        bgcolor="#121212",
+                                        shape=ft.RoundedRectangleBorder(radius=15),
+                                        padding=ft.Padding(25, 25, 25, 25),
+                                    ),
+                                    on_click=lambda _: self.router.navigate("/register"),
+                                    width=float("inf"),
+                                ),
+                                margin=ft.Margin(30, 0, 30, 60),
                             ),
-                            on_click=lambda _: self.router.navigate("/register"),
-                            width=float("inf"),
-                        ),
-                        margin=ft.Margin(0, 0, 0, 40),
+                        ],
+                        horizontal_alignment="center",
+                        spacing=0,
                     ),
-                ],
-                horizontal_alignment="center",
-                spacing=0,
-            ),
-            padding=30,
+                    expand=True,
+                ),
+            ],
             expand=True,
-            bgcolor="#F8F9FB",
         )
 
         return MainLayout(

@@ -17,7 +17,7 @@ ROUTES = [
         "label": "menu.home",
         "icon": ft.Icons.DASHBOARD,
         "show_in_top": True,
-        "show_in_bottom": True,
+        "show_in_bottom": False,
     },
     {
         "path": "/settings",
@@ -33,7 +33,7 @@ ROUTES = [
         "label": "menu.help",
         "icon": ft.Icons.HELP,
         "show_in_top": True,
-        "show_in_bottom": True,
+        "show_in_bottom": False,
     }
 ]
 

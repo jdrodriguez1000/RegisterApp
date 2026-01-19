@@ -65,4 +65,5 @@ class WelcomeView:
             content=content,
             router=self.router,
             show_app_bar=False,
+            show_bottom_bar=False,
         )

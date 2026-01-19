@@ -5,12 +5,13 @@ from core.i18n import I18n
 from configs.routes import ROUTES
 
 class MainLayout(ft.Column):
-    def __init__(self, page, content, router, show_app_bar=True):
+    def __init__(self, page, content, router, show_app_bar=True, show_bottom_bar=True):
         super().__init__(expand=True)
         self._page = page
         self.router = router
         self.content = content
         self.show_app_bar = show_app_bar
+        self.show_bottom_bar = show_bottom_bar
 
         self._build()
 
@@ -31,7 +32,7 @@ class MainLayout(ft.Column):
         )
 
         # BOTTOM BAR (mobile / tablet)
-        if AppState.device != "desktop":
+        if self.show_bottom_bar and AppState.device != "desktop":
             self.controls.append(self._bottom_bar())
 
     # ---------- TOP BAR ----------

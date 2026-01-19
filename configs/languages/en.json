@@ -22,6 +22,11 @@
     "join_us": "Join us",
     "forgot_password": "Forgot password?"
   },
+  "construction": {
+    "title": "Coming Soon!",
+    "subtitle": "We are working hard to bring you this feature. Please check back later!",
+    "back_button": "Back to Home"
+  },
   "home": {
     "title": "Welcome to RegisterApp"
   },

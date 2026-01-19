@@ -105,6 +105,7 @@ class LoginView:
                                                     color="#1E88E5",
                                                     weight="bold", # Mismo formato que Unete a nosotros
                                                 ),
+                                                on_click=lambda _: self.router.navigate("/construction"),
                                             ),
                                             alignment=ft.Alignment(1, 0),
                                         ),
@@ -142,7 +143,7 @@ class LoginView:
                                                         color="#1E88E5",
                                                         weight="bold",
                                                     ),
-                                                    on_click=lambda _: self.router.navigate("/register"),
+                                                    on_click=lambda _: self.router.navigate("/construction"),
                                                 ),
                                             ],
                                             alignment="center",

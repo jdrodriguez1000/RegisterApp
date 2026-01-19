@@ -22,6 +22,11 @@
     "join_us": "Únete a nosotros",
     "forgot_password": "¿Olvidaste tu contraseña?"
   },
+  "construction": {
+    "title": "¡Próximamente!",
+    "subtitle": "Estamos trabajando duro para ofrecerte esta funcionalidad. ¡Vuelva pronto!",
+    "back_button": "Volver al Inicio"
+  },
   "home": {
     "title": "Bienvenido a RegisterApp"
   },

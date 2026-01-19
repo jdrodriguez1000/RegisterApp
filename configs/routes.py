@@ -20,6 +20,14 @@ ROUTES = [
         "show_in_bottom": False,
     },
     {
+        "path": "/construction",
+        "view": "views.pages.under_construction_view.UnderConstructionView",
+        "label": "construction.title",
+        "icon": ft.Icons.CONSTRUCTION,
+        "show_in_top": False,
+        "show_in_bottom": False,
+    },
+    {
         "path": "/register",
         "view": "views.pages.home_view.HomeView", # Temporary redirect to home/dashboard
         "label": "Register",

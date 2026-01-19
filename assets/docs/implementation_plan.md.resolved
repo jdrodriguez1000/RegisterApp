@@ -45,6 +45,7 @@ The secure entry point and main navigation hub.
 #### [NEW] [views/pages/login_view.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/views/pages/login_view.py)
 - **Deliverable**: Secure login interface with Email and Password fields.
 - Include a link "Don't have an account? Join us" pointing to `/register`.
+- [NEW] Temporary "Under Construction" view for placeholder links.
 
 ---
 

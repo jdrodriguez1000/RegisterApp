@@ -21,6 +21,7 @@ class ProfileCompletionView:
             "label_style": ft.TextStyle(color="black", weight="bold"),
             "text_style": ft.TextStyle(color="black", weight="bold"),
             "filled": True,
+            "width": float("inf"),
         }
 
         # Controls

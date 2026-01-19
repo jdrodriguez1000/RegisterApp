@@ -5,11 +5,12 @@ from core.i18n import I18n
 from configs.routes import ROUTES
 
 class MainLayout(ft.Column):
-    def __init__(self, page, content, router):
+    def __init__(self, page, content, router, show_app_bar=True):
         super().__init__(expand=True)
         self._page = page
         self.router = router
         self.content = content
+        self.show_app_bar = show_app_bar
 
         self._build()
 
@@ -17,7 +18,8 @@ class MainLayout(ft.Column):
         self.controls.clear()
 
         # TOP BAR
-        self.controls.append(self._top_bar())
+        if self.show_app_bar:
+            self.controls.append(self._top_bar())
 
         # CONTENT
         self.controls.append(

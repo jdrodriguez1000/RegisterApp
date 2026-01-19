@@ -27,8 +27,8 @@ Setup the backend and the essential micro-framework configuration. (Finalized 20
 
 ---
 
-## Phase 2: Major Event - Onboarding Experience [IN PROGRESS 🏗️]
-The first interaction the user has with the app. (Started 2026-01-19)
+## Phase 2: Major Event - Onboarding Experience [COMPLETED ✅]
+The first interaction the user has with the app. (Finalized 2026-01-19)
 
 ### [Component] Onboarding UI
 #### [NEW] [views/pages/welcome_view.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/views/pages/welcome_view.py)

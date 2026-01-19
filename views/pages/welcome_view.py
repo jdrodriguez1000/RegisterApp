@@ -18,19 +18,12 @@ class WelcomeView:
                     ft.Container(
                         content=ft.Image(
                             src="img/welcome_hero.png",
-                            width=300,
-                            height=300,
+                            width=350,
+                            height=350,
                             fit="contain",
                         ),
                         alignment=ft.Alignment(0, 0),
-                        margin=ft.Margin(0, 40, 0, 20),
-                    ),
-                    ft.Text(
-                        I18n.t("welcome.title"),
-                        size=32,
-                        weight="bold",
-                        color="#1A1A1A",
-                        text_align="center",
+                        margin=ft.Margin(0, 60, 0, 20),
                     ),
                     ft.Container(height=10),
                     ft.Text(
@@ -71,4 +64,5 @@ class WelcomeView:
             page=self.page,
             content=content,
             router=self.router,
+            show_app_bar=False,
         )

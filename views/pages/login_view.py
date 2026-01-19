@@ -72,7 +72,6 @@ class LoginView:
                                 size=32,
                                 weight="bold",
                                 color="#1A1A1A",
-                                letter_spacing=1,
                             ),
                             ft.Container(height=40),
                             # Login Card

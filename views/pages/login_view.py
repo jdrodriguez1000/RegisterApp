@@ -44,7 +44,8 @@ class LoginView:
             prefix=ft.Icon(ft.Icons.LOCK_OUTLINED, color="black"),
         )
         
-        self.error_text = ft.Text("", color="red", size=14, text_align="center")
+        
+        # self.error_text removed
 
     async def _on_login_click(self, e):
         route = await self.controller.handle_login(
@@ -56,8 +57,13 @@ class LoginView:
         if route:
             self.router.navigate(route)
         else:
-            self.error_text.value = self.controller.model.error_message
-            self.error_text.update()
+            # Show SnackBar instead of Text
+            self.page.snack_bar = ft.SnackBar(
+                content=ft.Text(self.controller.model.error_message or "Error desconocido", color="white"),
+                bgcolor="red",
+            )
+            self.page.snack_bar.open = True
+            self.page.update()
 
     def render(self):
         self.page.theme_mode = ft.ThemeMode.LIGHT
@@ -119,7 +125,7 @@ class LoginView:
                                             alignment=ft.Alignment(1, 0),
                                         ),
                                         ft.Container(height=10),
-                                        self.error_text,
+                                        # Error text removed
                                         ft.Container(height=10),
                                         # Login Button
                                         ft.Button(

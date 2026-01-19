@@ -10,6 +10,10 @@ logger = get_logger("App")
 def main(page: ft.Page):
     try:
         page.assets_dir = "assets"
+        page.title = "RegisterApp"
+        # Configurar icono (favicon.ico en la carpeta assets)
+        # Nota: Flet busca en assets_dir automáticamente si se indica la ruta relativa
+        page.window.icon = "favicon.ico" 
 
         if page.platform in (ft.PagePlatform.WINDOWS, ft.PagePlatform.LINUX, ft.PagePlatform.MACOS):
             from core.app import FletingApp

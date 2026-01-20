@@ -1,6 +1,7 @@
 from models.user_profile import UserProfile
 from core.database import supabase
 from core.logger import get_logger
+from datetime import datetime
 
 logger = get_logger("ProfileController")
 
@@ -16,7 +17,6 @@ class ProfileController:
             user_response = supabase.auth.get_user()
             if not user_response or not user_response.user:
                 return False
-                
             user_id = user_response.user.id
             response = supabase.table("profiles").select("*").eq("id", user_id).single().execute()
             
@@ -26,6 +26,10 @@ class ProfileController:
                 self.model.civil_status = data.get("civil_status")
                 self.model.favorite_color = data.get("favorite_color")
                 self.model.favorite_sport = data.get("favorite_sport")
+                
+                # Auth data for display
+                self.model.email = user_response.user.email
+                self.model.full_name = user_response.user.user_metadata.get("full_name", "Usuario")
                 
                 # Parse date
                 bdate = data.get("birth_date")

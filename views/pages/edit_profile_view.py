@@ -3,7 +3,7 @@ from views.layouts.main_layout import MainLayout
 from controllers.profile_controller import ProfileController
 from models.user_profile import UserProfile, GENDERS, CIVIL_STATUSES, COLORS, SPORTS
 from core.i18n import I18n
-import datetime
+from datetime import datetime
 
 class EditProfileView:
     def __init__(self, page, router):
@@ -11,62 +11,90 @@ class EditProfileView:
         self.router = router
         self.controller = ProfileController()
         
+        # UI controls initialization
+        self._init_controls()
+        
+        # Initial data loading
+        self.page.run_task(self._load_data)
+
+    def _init_controls(self):
         # Shared Style for Fields
         field_style = {
             "bgcolor": "white",
             "border_radius": 12,
-            "border_color": "#1A1A1A",
-            "focused_border_color": "black",
+            "border_color": "#E0E0E0",
+            "focused_border_color": "#121212",
             "color": "black",
             "label_style": ft.TextStyle(color="black", weight="bold"),
             "text_style": ft.TextStyle(color="black", weight="bold"),
             "filled": True,
             "width": float("inf"),
+            "height": 55,
         }
 
-        # Controls
+        # User Info Displays (Read Only)
+        self.name_text = ft.Text("...", size=22, weight="bold", color="#1A1A1A")
+        self.email_text = ft.Text("...", size=14, color="#616161", weight="w500")
+
+        # Form Controls
         self.gender_dropdown = ft.Dropdown(
             label=I18n.t("profile.gender_label"),
             options=[ft.dropdown.Option(g) for g in GENDERS],
+            prefix=ft.Icon(ft.Icons.PERSON_OUTLINE, color="black"),
             **field_style
         )
         
         self.civil_status_dropdown = ft.Dropdown(
             label=I18n.t("profile.civil_status_label"),
             options=[ft.dropdown.Option(s) for s in CIVIL_STATUSES],
+            prefix=ft.Icon(ft.Icons.PEOPLE_OUTLINE, color="black"),
             **field_style
         )
         
         self.color_dropdown = ft.Dropdown(
             label=I18n.t("profile.favorite_color_label"),
             options=[ft.dropdown.Option(c) for c in COLORS],
+            prefix=ft.Icon(ft.Icons.PALETTE_OUTLINED, color="black"),
             **field_style
         )
         
         self.sport_dropdown = ft.Dropdown(
             label=I18n.t("profile.favorite_sport_label"),
             options=[ft.dropdown.Option(s) for s in SPORTS],
+            prefix=ft.Icon(ft.Icons.SPORTS_SOCCER, color="black"),
             **field_style
         )
         
-        # Date Input
         self.date_input = ft.TextField(
             label=I18n.t("profile.birth_date_label"),
             hint_text=I18n.t("profile.birth_date_hint"),
-            read_only=False,
-            hint_style=ft.TextStyle(color="#BCBCBC"),
+            prefix=ft.Icon(ft.Icons.CALENDAR_MONTH, color="black"),
             cursor_color="black",
             **field_style
         )
-        self.date_input.prefix = ft.Icon(ft.Icons.CALENDAR_MONTH, color="black")
 
-        self.error_text = ft.Text("", color="red", size=14, text_align="center")
-        self.success_text = ft.Text("", color="green", size=14, text_align="center")
-        
+        self.error_text = ft.Text("", color="red", size=14, text_align="center", weight="bold")
         self.loader = ft.ProgressBar(width=400, color="black", visible=False)
         
-        # Initial data loading
-        self.page.run_task(self._load_data)
+        # Save Button Container (Responsive Button Pattern)
+        self.save_button = ft.Container(
+            content=ft.Button(
+                content=ft.Text(
+                    I18n.t("edit_profile.save_button"),
+                    color="white",
+                    weight="bold",
+                    size=16,
+                ),
+                on_click=self._on_save_click,
+                style=ft.ButtonStyle(
+                    bgcolor="#121212",
+                    shape=ft.RoundedRectangleBorder(radius=12),
+                    padding=ft.Padding(20, 20, 20, 20),
+                ),
+                height=55,
+            ),
+            width=float("inf"),
+        )
 
     async def _load_data(self):
         self.loader.visible = True
@@ -75,6 +103,8 @@ class EditProfileView:
         success = await self.controller.get_profile()
         if success:
             m = self.controller.model
+            self.name_text.value = m.full_name
+            self.email_text.value = m.email
             self.gender_dropdown.value = m.gender
             self.civil_status_dropdown.value = m.civil_status
             self.color_dropdown.value = m.favorite_color
@@ -97,7 +127,7 @@ class EditProfileView:
         if self.date_input.value:
             try:
                 date_str = self.date_input.value.strip()
-                self.controller.model.birth_date = datetime.datetime.strptime(date_str, "%d/%m/%Y")
+                self.controller.model.birth_date = datetime.strptime(date_str, "%d/%m/%Y")
             except ValueError:
                 self.controller.error_message = I18n.t("profile.error_date_format")
                 self.controller.model.birth_date = None
@@ -106,7 +136,6 @@ class EditProfileView:
 
     async def _on_save_click(self, e):
         self.error_text.value = ""
-        self.success_text.value = ""
         self.controller.error_message = None
         
         self._sync_model()
@@ -120,72 +149,129 @@ class EditProfileView:
         self.page.update()
         
         success = await self.controller.save_profile(self.page, self.router)
-        if success:
-            # save_profile navigates to /dashboard if successful
-            pass
-        else:
-            self.error_text.value = self.controller.error_message
+        if not success:
+            self.error_text.value = self.controller.error_message or "Error al guardar el perfil"
             self.loader.visible = False
             self.page.update()
 
     def render(self):
-        content = ft.Container(
-            content=ft.Column(
-                controls=[
-                    ft.Container(height=20),
-                    # Back Button
-                    ft.IconButton(
-                        icon=ft.Icons.ARROW_BACK_IOS_NEW,
-                        icon_color="black",
-                        on_click=lambda _: self.router.navigate("/dashboard")
-                    ),
-                    
-                    # Title Section
-                    ft.Text(I18n.t("edit_profile.title"), size=32, weight="bold", color="#1A1A1A"),
-                    ft.Text(I18n.t("edit_profile.subtitle"), size=16, color="#8E8E93"),
-                    ft.Container(height=20),
-                    
-                    self.loader,
-                    
-                    # Fields
-                    self.gender_dropdown,
-                    self.date_input,
-                    self.civil_status_dropdown,
-                    self.color_dropdown,
-                    self.sport_dropdown,
-                    
-                    ft.Container(height=10),
-                    self.error_text,
-                    self.success_text,
-                    ft.Container(height=10),
-                    
-                    # Save Button
-                    ft.Container(
-                        content=ft.ElevatedButton(
-                            text=I18n.t("edit_profile.save_button"),
-                            on_click=self._on_save_click,
-                            style=ft.ButtonStyle(
-                                color="white",
-                                bgcolor="black",
-                                shape=ft.RoundedRectangleBorder(radius=12),
+        # Professional Dashboard/Profile Background Pattern
+        content = ft.Stack(
+            controls=[
+                # BACKGROUND
+                ft.Image(
+                    src="img/welcome_bg.png",
+                    width=390,
+                    height=844,
+                    fit="cover",
+                ),
+                # UI CONTAINER
+                ft.Container(
+                    content=ft.Column(
+                        controls=[
+                            ft.Container(height=40),
+                            # Header with Back Button
+                            ft.Row(
+                                controls=[
+                                    ft.IconButton(
+                                        icon=ft.Icons.ARROW_BACK_IOS_NEW,
+                                        icon_color="#1A1A1A",
+                                        on_click=lambda _: self.router.navigate("/dashboard"),
+                                    ),
+                                    ft.Text(
+                                        I18n.t("edit_profile.title"),
+                                        size=24,
+                                        weight="bold",
+                                        color="#1A1A1A",
+                                    ),
+                                ],
+                                alignment="start",
                             ),
-                            height=50,
-                        ),
-                        width=float("inf"),
+                            ft.Container(height=10),
+                            # Progress Loader
+                            self.loader,
+                            
+                            # Card Content
+                            ft.Container(
+                                content=ft.Column(
+                                    controls=[
+                                        # User Header inside card
+                                        ft.Row(
+                                            controls=[
+                                                ft.CircleAvatar(
+                                                    content=ft.Icon(ft.Icons.PERSON, color="white"),
+                                                    bgcolor="#1A1A1A",
+                                                    radius=25,
+                                                ),
+                                                ft.Column(
+                                                    controls=[
+                                                        self.name_text,
+                                                        self.email_text,
+                                                    ],
+                                                    spacing=0,
+                                                )
+                                            ],
+                                            spacing=15,
+                                        ),
+                                        ft.Divider(height=40, color="#EEEEEE"),
+                                        
+                                        # Subtitle
+                                        ft.Text(
+                                            I18n.t("edit_profile.subtitle"),
+                                            size=14,
+                                            color="#616161",
+                                            weight="w500",
+                                        ),
+                                        ft.Container(height=15),
+                                        
+                                        # Fields Area
+                                        ft.Column(
+                                            controls=[
+                                                self.gender_dropdown,
+                                                self.date_input,
+                                                self.civil_status_dropdown,
+                                                self.color_dropdown,
+                                                self.sport_dropdown,
+                                            ],
+                                            spacing=15,
+                                            scroll=ft.ScrollMode.HIDDEN,
+                                            height=350, # Fixed height for inner scroll if needed
+                                        ),
+                                        
+                                        ft.Container(height=10),
+                                        self.error_text,
+                                        ft.Container(height=10),
+                                        
+                                        # Action Button
+                                        self.save_button,
+                                    ],
+                                    spacing=0,
+                                ),
+                                bgcolor="white",
+                                padding=ft.Padding(25, 30, 25, 30),
+                                border_radius=28,
+                                shadow=ft.BoxShadow(
+                                    spread_radius=1,
+                                    blur_radius=20,
+                                    color=ft.Colors.with_opacity(0.1, "black"),
+                                    offset=ft.Offset(0, 8),
+                                ),
+                                margin=ft.Margin(10, 0, 10, 0),
+                            ),
+                        ],
+                        horizontal_alignment="center",
+                        scroll=ft.ScrollMode.ADAPTIVE,
                     ),
-                    ft.Container(height=30),
-                ],
-                scroll=ft.ScrollMode.ADAPTIVE,
-                spacing=15,
-            ),
-            padding=30,
+                    expand=True,
+                ),
+            ],
             expand=True,
-            bgcolor="#F5F5F7", # Light gray background
         )
-        
+
         return MainLayout(
             page=self.page,
             content=content,
+            router=self.router,
             show_app_bar=False,
-            show_bottom_bar=False # Dashboard has its own
-        ).render()
+            show_bottom_bar=False,
+        )

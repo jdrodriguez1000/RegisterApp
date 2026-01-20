@@ -9,6 +9,8 @@ class UserProfile:
     civil_status: Optional[str] = None
     favorite_color: Optional[str] = None
     favorite_sport: Optional[str] = None
+    full_name: Optional[str] = ""
+    email: Optional[str] = ""
     
     # Validation helpers
     def validate(self):

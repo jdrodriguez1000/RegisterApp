@@ -1,17 +1,154 @@
 {
   "app": {
-    "name": "Fleting"
+    "name": "RegisterApp"
   },
   "menu": {
-    "home": "Inicio",
-    "settings": "Configurações",
+    "home": "Home",
+    "settings": "Configs",
     "help": "Ajuda"
   },
+  "welcome": {
+    "title": "Bem-vindo ao RegisterApp",
+    "subtitle": "Queremos conhecê-lo melhor. Crie seu perfil hoje e descubra uma experiência desenhada exclusivamente para você.",
+    "button": "Começar Agora"
+  },
+  "login": {
+    "title": "Benvindo de volta!",
+    "subtitle": "Insira suas credenciais para continuar.",
+    "email_label": "Seu e-mail",
+    "password_label": "Sua senha",
+    "login_button": "Entrar",
+    "no_account": "Não tem uma conta?",
+    "join_us": "Junte-se a nós",
+    "forgot_password": "Esqueceu a senha?"
+  },
+  "construction": {
+    "title": "Em breve!",
+    "subtitle": "Estamos trabalhando duro para trazer esta funcionalidade. Por favor, volte mais tarde!",
+    "back_button": "Voltar para Home"
+  },
+  "register": {
+    "title": "Crie sua conta",
+    "subtitle": "Junte-se à nossa comunidade e comece sua experiência digital hoje mesmo.",
+    "name_label": "Nome completo",
+    "email_label": "E-mail",
+    "password_label": "Senha",
+    "register_button": "Registrar",
+    "have_account": "Já tem uma conta?",
+    "login_now": "Entrar agora",
+    "error_empty": "Todos os campos são obrigatórios",
+    "error_email": "E-mail inválido",
+    "error_password": "A senha deve ter pelo menos 6 caracteres"
+  },
+  "verification": {
+    "title": "Verifique sua conta",
+    "subtitle": "Enviamos um link de confirmação para seu e-mail. Por favor, verifique-o para ativar sua identidade digital.",
+    "check_button": "Já verifiquei meu e-mail",
+    "resend_link": "Não recebeu o e-mail? Reenviar",
+    "back_to_login": "Voltar para o login"
+  },
   "home": {
-    "title": "Bem-vindo ao Fleting"
+    "title": "Bem-vindo ao RegisterApp"
   },
   "settings": {
-    "title": "Configurações",
+    "title": "Configs",
     "language": "Idioma"
+  },
+  "dashboard": {
+    "welcome": "Bem-vindo,",
+    "not_specified": "Não especificado",
+    "personal_info": "Informações Pessoais",
+    "gender": "Gênero",
+    "birth_date": "Data de Nasc.",
+    "civil_status": "Estado Civil",
+    "fav_color": "Cor Favorita",
+    "fav_sport": "Esporte Favorito",
+    "nav": {
+      "language": "Idioma",
+      "security": "Segurança",
+      "profile": "Perfil",
+      "logout": "Sair"
+    },
+    "logout": "Sair"
+  },
+  "security": {
+    "password_too_short": "A senha deve ter pelo menos 8 caracteres",
+    "password_no_upper": "A senha deve ter pelo menos uma letra maiúscula",
+    "password_no_lower": "A senha deve ter pelo menos uma letra minúscula",
+    "password_no_digit": "A senha deve ter pelo menos um dígito",
+    "password_no_special": "A senha deve ter pelo menos um caractere especial (!@#$%^&*...)"
+  },
+  "change_password": {
+    "title": "Alterar Senha",
+    "subtitle": "Atualize suas credenciais para manter sua conta segura",
+    "current_password_label": "Senha Atual",
+    "new_password_label": "Nova Senha",
+    "confirm_password_label": "Confirmar Nova Senha",
+    "button": "Atualizar Senha",
+    "success": "Senha atualizada com sucesso",
+    "error_mismatch": "As novas senhas não coincidem",
+    "error_current_wrong": "A senha atual está incorreta",
+    "error_same_as_old": "A nova senha não pode ser igual à antiga"
+  },
+  "profile": {
+    "gender_label": "Gênero",
+    "birth_date_label": "Data de Nascimento",
+    "civil_status_label": "Estado Civil",
+    "favorite_color_label": "Cor Favorita",
+    "favorite_sport_label": "Esporte Favorito",
+    "birth_date_hint": "DD/MM/AAAA",
+    "error_date_format": "Formato de data inválido. Use DD/MM/AAAA",
+    "completion_title": "Complete seu Perfil",
+    "completion_subtitle": "Para lhe proporcionar uma melhor experiência",
+    "save_continue": "Salvar e Continuar"
+  },
+  "edit_profile": {
+    "title": "Editar Perfil",
+    "subtitle": "Atualize suas informações pessoais",
+    "save_button": "Salvar Alterações",
+    "success": "Perfil atualizado com sucesso",
+    "error_loading": "Erro ao carregar o perfil"
+  },
+  "lists": {
+    "genders": [
+      "Masculino",
+      "Feminino",
+      "Outro",
+      "Prefiro não dizer"
+    ],
+    "civil_statuses": [
+      "Solteiro(a)",
+      "Casado(a)",
+      "Divorciado(a)",
+      "Viúvo(a)",
+      "União Estável"
+    ],
+    "colors": [
+      "Azul",
+      "Vermelho",
+      "Verde",
+      "Amarelo",
+      "Preto",
+      "Branco",
+      "Roxo",
+      "Laranja"
+    ],
+    "sports": [
+      "Futebol",
+      "Basquete",
+      "Tênis",
+      "Natação",
+      "Ciclismo",
+      "Corrida",
+      "Voleibol",
+      "Outro"
+    ]
+  },
+  "profile_errors": {
+    "gender": "Por favor selecione seu gênero.",
+    "birth_date": "Por favor insira sua data de nascimento.",
+    "civil_status": "Por favor selecione seu estado civil.",
+    "color": "Por favor selecione sua cor favorita.",
+    "sport": "Por favor selecione seu esporte favorito."
   }
 }

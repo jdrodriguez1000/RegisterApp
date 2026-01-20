@@ -59,20 +59,36 @@ class RegisterView:
         # self.error_text removed
         
         # Custom SnackBar controls
-        self.snack_text = ft.Text("", color="white")
+        self.snack_text = ft.Text("", color="white", weight="bold")
         self.snack_container = ft.Container(
             content=self.snack_text,
-            bgcolor=ft.Colors.ERROR,
+            bgcolor=ft.Colors.RED_400,
             padding=15,
-            border_radius=10,
+            border_radius=12,
             alignment=ft.Alignment(0, 0),
             visible=False,
-            # Positioning for direct usage in Stack
             left=20,
             right=20,
-            bottom=20,
-            shadow=ft.BoxShadow(blur_radius=10, color=ft.Colors.with_opacity(0.3, "black")),
+            bottom=40,
+            shadow=ft.BoxShadow(blur_radius=15, color=ft.Colors.with_opacity(0.3, "black")),
+            animate_opacity=300,
         )
+
+    async def _show_snackbar(self, message, is_error=True):
+        self.snack_text.value = message
+        self.snack_container.bgcolor = ft.Colors.RED_400 if is_error else ft.Colors.GREEN_600
+        self.snack_container.visible = True
+        self.snack_container.opacity = 1
+        self.snack_container.update()
+        
+        # Hide after 3 seconds
+        import asyncio
+        await asyncio.sleep(3)
+        self.snack_container.opacity = 0
+        self.snack_container.update()
+        await asyncio.sleep(0.3)
+        self.snack_container.visible = False
+        self.snack_container.update()
 
     async def _on_register_click(self, e):
         success = await self.controller.handle_register(
@@ -85,18 +101,10 @@ class RegisterView:
         if success:
             self.router.navigate("/verification-pending")
         else:
-            # Show Custom SnackBar
             msg = self.model.error_message or "Error desconocido"
-            self.snack_text.value = I18n.t(msg) if "error" in msg else msg
-            
-            self.snack_container.visible = True
-            self.snack_container.update()
-            
-            # Hide after 3 seconds
-            import asyncio
-            await asyncio.sleep(3)
-            self.snack_container.visible = False
-            self.snack_container.update()
+            # Translate if it's a key
+            translated_msg = I18n.t(msg) if "." in msg else msg
+            await self._show_snackbar(translated_msg, is_error=True)
 
     def render(self):
         # FORCE LIGHT MODE for this view to ensure input text is visible

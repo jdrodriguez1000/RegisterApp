@@ -90,6 +90,14 @@ ROUTES = [
         "icon": ft.Icons.EDIT,
         "show_in_top": False,
         "show_in_bottom": False,
+    },
+    {
+        "path": "/settings/language",
+        "view": "views.pages.language_settings_view.LanguageSettingsView",
+        "label": "settings.language",
+        "icon": ft.Icons.LANGUAGE,
+        "show_in_top": False,
+        "show_in_bottom": False,
     }
 ]
 

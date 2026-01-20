@@ -141,7 +141,7 @@ class DashboardView:
         bottom_nav = ft.Container(
             content=ft.Row(
                 controls=[
-                    self._build_nav_item(ft.Icons.LANGUAGE, I18n.t("dashboard.nav.language"), "/construction"),
+                    self._build_nav_item(ft.Icons.LANGUAGE, I18n.t("dashboard.nav.language"), "/settings/language"),
                     self._build_nav_item(ft.Icons.LOCK, I18n.t("dashboard.nav.security"), "/change-password"),
                     self._build_nav_item(ft.Icons.EDIT, I18n.t("dashboard.nav.profile"), "/edit-profile"), 
                     self._build_nav_item(ft.Icons.LOGOUT, I18n.t("dashboard.nav.logout"), "/login", color="#FF453A"),

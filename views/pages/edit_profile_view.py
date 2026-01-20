@@ -1,7 +1,7 @@
 import flet as ft
 from views.layouts.main_layout import MainLayout
 from controllers.profile_controller import ProfileController
-from models.user_profile import UserProfile, GENDERS, CIVIL_STATUSES, COLORS, SPORTS
+from models.user_profile import UserProfile
 from core.i18n import I18n
 from datetime import datetime
 import asyncio
@@ -37,28 +37,28 @@ class EditProfileView:
         self.name_text = ft.Text("...", size=22, weight="bold", color="#1A1A1A")
         self.email_text = ft.Text("...", size=14, color="#616161", weight="w500")
 
-        # Form Controls
+        # Form Controls (Loading keys as indices, text from I18n lists)
         self.gender_dropdown = ft.Dropdown(
             label=I18n.t("profile.gender_label"),
-            options=[ft.dropdown.Option(g) for g in GENDERS],
+            options=[ft.dropdown.Option(key=str(i), text=g) for i, g in enumerate(I18n.t("lists.genders"))],
             **field_style
         )
         
         self.civil_status_dropdown = ft.Dropdown(
             label=I18n.t("profile.civil_status_label"),
-            options=[ft.dropdown.Option(s) for s in CIVIL_STATUSES],
+            options=[ft.dropdown.Option(key=str(i), text=s) for i, s in enumerate(I18n.t("lists.civil_statuses"))],
             **field_style
         )
         
         self.color_dropdown = ft.Dropdown(
             label=I18n.t("profile.favorite_color_label"),
-            options=[ft.dropdown.Option(c) for c in COLORS],
+            options=[ft.dropdown.Option(key=str(i), text=c) for i, c in enumerate(I18n.t("lists.colors"))],
             **field_style
         )
         
         self.sport_dropdown = ft.Dropdown(
             label=I18n.t("profile.favorite_sport_label"),
-            options=[ft.dropdown.Option(s) for s in SPORTS],
+            options=[ft.dropdown.Option(key=str(i), text=s) for i, s in enumerate(I18n.t("lists.sports"))],
             **field_style
         )
         
@@ -118,10 +118,10 @@ class EditProfileView:
             m = self.controller.model
             self.name_text.value = m.full_name
             self.email_text.value = m.email
-            self.gender_dropdown.value = m.gender
-            self.civil_status_dropdown.value = m.civil_status
-            self.color_dropdown.value = m.favorite_color
-            self.sport_dropdown.value = m.favorite_sport
+            self.gender_dropdown.value = I18n.get_index_for_value("lists.genders", m.gender)
+            self.civil_status_dropdown.value = I18n.get_index_for_value("lists.civil_statuses", m.civil_status)
+            self.color_dropdown.value = I18n.get_index_for_value("lists.colors", m.favorite_color)
+            self.sport_dropdown.value = I18n.get_index_for_value("lists.sports", m.favorite_sport)
             
             if m.birth_date:
                 self.date_input.value = m.birth_date.strftime("%d/%m/%Y")

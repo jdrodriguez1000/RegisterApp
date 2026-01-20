@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import Optional
 from datetime import datetime
+from core.i18n import I18n
 
 @dataclass
 class UserProfile:
@@ -15,19 +16,13 @@ class UserProfile:
     # Validation helpers
     def validate(self):
         if not self.gender:
-            return "Por favor selecciona tu género."
+            return I18n.t("profile_errors.gender")
         if not self.birth_date:
-            return "Por favor ingresa tu fecha de nacimiento."
+            return I18n.t("profile_errors.birth_date")
         if not self.civil_status:
-            return "Por favor selecciona tu estado civil."
+            return I18n.t("profile_errors.civil_status")
         if not self.favorite_color:
-            return "Por favor selecciona tu color favorito."
+            return I18n.t("profile_errors.color")
         if not self.favorite_sport:
-            return "Por favor selecciona tu deporte favorito."
+            return I18n.t("profile_errors.sport")
         return None
-
-# Constants for dropdowns
-GENDERS = ["Masculino", "Femenino", "Otro", "Prefiero no decirlo"]
-CIVIL_STATUSES = ["Soltero/a", "Casado/a", "Divorciado/a", "Viudo/a", "Unión Libre"]
-COLORS = ["Azul", "Rojo", "Verde", "Amarillo", "Negro", "Blanco", "Morado", "Naranja"]
-SPORTS = ["Fútbol", "Baloncesto", "Tenis", "Natación", "Ciclismo", "Correr", "Voleibol", "Otro"]

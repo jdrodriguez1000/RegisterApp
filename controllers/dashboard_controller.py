@@ -31,14 +31,15 @@ class DashboardController:
             # 3. Get Extended Info from Profiles Table
             response = supabase.table("profiles").select("*").eq("id", user.id).single().execute()
             
+            from core.i18n import I18n
             if response.data:
                 p = response.data
-                self.model.gender = p.get("gender") or "No especificado"
+                self.model.gender = I18n.get_list_item("lists.genders", p.get("gender")) or I18n.t("dashboard.not_specified")
                 # Format birth date if needed, assuming ISO string YYYY-MM-DD
                 self.model.birth_date = p.get("birth_date") or ""
-                self.model.civil_status = p.get("civil_status") or ""
-                self.model.favorite_color = p.get("favorite_color") or ""
-                self.model.favorite_sport = p.get("favorite_sport") or ""
+                self.model.civil_status = I18n.get_list_item("lists.civil_statuses", p.get("civil_status")) or ""
+                self.model.favorite_color = I18n.get_list_item("lists.colors", p.get("favorite_color")) or ""
+                self.model.favorite_sport = I18n.get_list_item("lists.sports", p.get("favorite_sport")) or ""
                 
             self.model.is_loading = False
             return True

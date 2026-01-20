@@ -116,13 +116,23 @@ Allowing users to modify their personal information. (Finalized 2026-01-19)
 
 ---
 
-## Phase 9: Major Event - Language Settings
-Allowing users to personalize the application language.
+## Phase 9: Major Event - Language Settings [COMPLETED ✅]
+Allowing users to personalize the application language and managing dynamic lists through internationalization.
 
 ### [Component] Internationalization
+#### [UPDATE] [core/i18n.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/core/i18n.py)
+- Support for fetching lists (arrays) from translation files.
+- Support for local persistent storage of language preference.
+
+#### [NEW] [configs/languages/pt.json](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/configs/languages/pt.json)
+- **Deliverable**: Complete Portuguese translation file.
+
+#### [UPDATE] [en.json, es.json, pt.json]
+- Move static lists (Genders, Civil Statuses, Colors, Sports) to JSON for central management.
+
 #### [NEW] [views/pages/language_settings_view.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/views/pages/language_settings_view.py)
-- **Deliverable**: Selector for English/Spanish.
-- Updates the `app_language` state and persists user preference.
+- **Deliverable**: Professional language selector (EN/ES/PT).
+- Updates the application language globally and persists user preference.
 
 ---
 

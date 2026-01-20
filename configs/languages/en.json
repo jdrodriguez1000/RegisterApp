@@ -56,6 +56,7 @@
   },
   "dashboard": {
     "welcome": "Welcome,",
+    "not_specified": "Not specified",
     "personal_info": "Personal Information",
     "gender": "Gender",
     "birth_date": "Birth Date",
@@ -96,7 +97,10 @@
     "favorite_color_label": "Favorite Color",
     "favorite_sport_label": "Favorite Sport",
     "birth_date_hint": "DD/MM/YYYY",
-    "error_date_format": "Invalid date format. Use DD/MM/YYYY"
+    "error_date_format": "Invalid date format. Use DD/MM/YYYY",
+    "completion_title": "Complete Your Profile",
+    "completion_subtitle": "To provide you with a better experience",
+    "save_continue": "Save and Continue"
   },
   "edit_profile": {
     "title": "Edit Profile",
@@ -104,5 +108,47 @@
     "save_button": "Save Changes",
     "success": "Profile updated successfully",
     "error_loading": "Error loading profile"
+  },
+  "lists": {
+    "genders": [
+      "Male",
+      "Female",
+      "Other",
+      "I prefer not to say"
+    ],
+    "civil_statuses": [
+      "Single",
+      "Married",
+      "Divorced",
+      "Widowed",
+      "Domestic Partnership"
+    ],
+    "colors": [
+      "Blue",
+      "Red",
+      "Green",
+      "Yellow",
+      "Black",
+      "White",
+      "Purple",
+      "Orange"
+    ],
+    "sports": [
+      "Soccer",
+      "Basketball",
+      "Tennis",
+      "Swimming",
+      "Cycling",
+      "Running",
+      "Volleyball",
+      "Other"
+    ]
+  },
+  "profile_errors": {
+    "gender": "Please select your gender.",
+    "birth_date": "Please enter your birth date.",
+    "civil_status": "Please select your civil status.",
+    "color": "Please select your favorite color.",
+    "sport": "Please select your favorite sport."
   }
 }

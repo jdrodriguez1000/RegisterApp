@@ -16,7 +16,9 @@ class RegisterModel:
         if "@" not in self.email or "." not in self.email:
             return "register.error_email"
             
-        if len(self.password) < 6:
-            return "register.error_password"
+        from core.security import get_password_strength_message_key
+        strength_error = get_password_strength_message_key(self.password)
+        if strength_error:
+            return strength_error
             
         return None

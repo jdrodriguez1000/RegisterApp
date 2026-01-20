@@ -67,6 +67,26 @@
       "security": "Seguridad",
       "profile": "Perfil",
       "logout": "Salir"
-    }
+    },
+    "logout": "Salir"
+  },
+  "security": {
+    "password_too_short": "La contraseña debe tener al menos 8 caracteres",
+    "password_no_upper": "La contraseña debe tener al menos una mayúscula",
+    "password_no_lower": "La contraseña debe tener al menos una minúscula",
+    "password_no_digit": "La contraseña debe tener al menos un número",
+    "password_no_special": "La contraseña debe tener al menos un carácter especial (!@#$%^&*...)"
+  },
+  "change_password": {
+    "title": "Cambiar Contraseña",
+    "subtitle": "Actualiza tus credenciales para mantener tu cuenta segura",
+    "current_password_label": "Contraseña Actual",
+    "new_password_label": "Nueva Contraseña",
+    "confirm_password_label": "Confirmar Nueva Contraseña",
+    "button": "Actualizar Contraseña",
+    "success": "Contraseña actualizada correctamente",
+    "error_mismatch": "Las nuevas contraseñas no coinciden",
+    "error_current_wrong": "La contraseña actual es incorrecta",
+    "error_same_as_old": "La nueva contraseña no puede ser igual a la anterior"
   }
 }

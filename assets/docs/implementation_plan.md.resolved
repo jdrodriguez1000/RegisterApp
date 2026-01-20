@@ -86,12 +86,22 @@ The main workspace for the authenticated user. (Finalized 2026-01-19)
 
 ---
 
-## Phase 7: Major Event - Secure Password Change
-Allowing users to update their credentials from within the app.
+## Phase 7: Major Event - Secure Password Change [COMPLETED ✅]
+Allowing users to update their credentials from within the app. (Finalized 2026-01-19)
 
 ### [Component] Password Internal Management
+#### [NEW] [models/change_password_model.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/models/change_password_model.py)
+- Logic for validating current password and new password strength.
+#### [NEW] [controllers/change_password_controller.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/controllers/change_password_controller.py)
+- Integration with Supabase auth for re-authentication and password update.
 #### [NEW] [views/pages/change_password_view.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/views/pages/change_password_view.py)
-- **Deliverable**: Secure password update screen (requires current password).
+- **Deliverable**: UI with Current Password, New Password, and Confirm New Password fields.
+- Visual feedback for password strength.
+- Integration with the controller to handle the update process.
+#### [MODIFY] [core/router.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/core/router.py)
+- Register the `/change-password` route.
+#### [MODIFY] [views/pages/dashboard_view.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/views/pages/dashboard_view.py)
+- Link the "Password" icon in the navigation bar to `/change-password`.
 
 ---
 

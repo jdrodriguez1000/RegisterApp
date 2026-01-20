@@ -74,6 +74,14 @@ ROUTES = [
         "icon": ft.Icons.HELP,
         "show_in_top": True,
         "show_in_bottom": False,
+    },
+    {
+        "path": "/change-password",
+        "view": "views.pages.change_password_view.ChangePasswordView",
+        "label": "change_password.title",
+        "icon": ft.Icons.LOCK,
+        "show_in_top": False,
+        "show_in_bottom": False,
     }
 ]
 

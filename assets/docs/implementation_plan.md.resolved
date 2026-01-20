@@ -105,8 +105,8 @@ Allowing users to update their credentials from within the app. (Finalized 2026-
 
 ---
 
-## Phase 8: Major Event - Edit Profile [IN PROGRESS 🏗️]
-Allowing users to modify their personal information.
+## Phase 8: Major Event - Edit Profile [COMPLETED ✅]
+Allowing users to modify their personal information. (Finalized 2026-01-19)
 
 ### [Component] Profile Management
 #### [NEW] [views/pages/edit_profile_view.py](file:///c:/Users/USUARIO/Documents/Proyectos/RegisterApp/views/pages/edit_profile_view.py)

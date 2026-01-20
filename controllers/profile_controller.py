@@ -79,9 +79,6 @@ class ProfileController:
             supabase.table("profiles").update(data).eq("id", user_id).execute()
             
             logger.info("Profile updated successfully")
-            
-            # Navigate to Dashboard
-            router.navigate("/dashboard")
             return True
 
         except Exception as e:

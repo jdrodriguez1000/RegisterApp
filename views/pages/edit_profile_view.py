@@ -4,6 +4,7 @@ from controllers.profile_controller import ProfileController
 from models.user_profile import UserProfile, GENDERS, CIVIL_STATUSES, COLORS, SPORTS
 from core.i18n import I18n
 from datetime import datetime
+import asyncio
 
 class EditProfileView:
     def __init__(self, page, router):
@@ -40,28 +41,24 @@ class EditProfileView:
         self.gender_dropdown = ft.Dropdown(
             label=I18n.t("profile.gender_label"),
             options=[ft.dropdown.Option(g) for g in GENDERS],
-            prefix=ft.Icon(ft.Icons.PERSON_OUTLINE, color="black"),
             **field_style
         )
         
         self.civil_status_dropdown = ft.Dropdown(
             label=I18n.t("profile.civil_status_label"),
             options=[ft.dropdown.Option(s) for s in CIVIL_STATUSES],
-            prefix=ft.Icon(ft.Icons.PEOPLE_OUTLINE, color="black"),
             **field_style
         )
         
         self.color_dropdown = ft.Dropdown(
             label=I18n.t("profile.favorite_color_label"),
             options=[ft.dropdown.Option(c) for c in COLORS],
-            prefix=ft.Icon(ft.Icons.PALETTE_OUTLINED, color="black"),
             **field_style
         )
         
         self.sport_dropdown = ft.Dropdown(
             label=I18n.t("profile.favorite_sport_label"),
             options=[ft.dropdown.Option(s) for s in SPORTS],
-            prefix=ft.Icon(ft.Icons.SPORTS_SOCCER, color="black"),
             **field_style
         )
         
@@ -76,7 +73,23 @@ class EditProfileView:
         self.error_text = ft.Text("", color="red", size=14, text_align="center", weight="bold")
         self.loader = ft.ProgressBar(width=400, color="black", visible=False)
         
-        # Save Button Container (Responsive Button Pattern)
+        # Custom SnackBar controls
+        self.snack_text = ft.Text("", color="white", weight="bold")
+        self.snack_container = ft.Container(
+            content=self.snack_text,
+            bgcolor=ft.Colors.ERROR,
+            padding=15,
+            border_radius=12,
+            alignment=ft.Alignment(0, 0),
+            visible=False,
+            left=20,
+            right=20,
+            bottom=40,
+            shadow=ft.BoxShadow(blur_radius=15, color=ft.Colors.with_opacity(0.3, "black")),
+            animate_opacity=300,
+        )
+
+        # Save Button Container
         self.save_button = ft.Container(
             content=ft.Button(
                 content=ft.Text(
@@ -113,7 +126,7 @@ class EditProfileView:
             if m.birth_date:
                 self.date_input.value = m.birth_date.strftime("%d/%m/%Y")
         else:
-            self.error_text.value = I18n.t("edit_profile.error_loading")
+            await self._show_snackbar(I18n.t("edit_profile.error_loading"))
             
         self.loader.visible = False
         self.page.update()
@@ -134,6 +147,22 @@ class EditProfileView:
         else:
              self.controller.model.birth_date = None
 
+    async def _show_snackbar(self, message, is_error=True):
+        self.snack_text.value = message
+        self.snack_container.bgcolor = ft.Colors.ERROR if is_error else ft.Colors.GREEN_600
+        self.snack_container.visible = True
+        self.snack_container.opacity = 1
+        self.snack_container.update()
+        
+        # Success messages allow for manual redirection after delay, errors hide themselves
+        if is_error:
+            await asyncio.sleep(4)
+            self.snack_container.opacity = 0
+            self.snack_container.update()
+            await asyncio.sleep(0.3)
+            self.snack_container.visible = False
+            self.snack_container.update()
+
     async def _on_save_click(self, e):
         self.error_text.value = ""
         self.controller.error_message = None
@@ -141,18 +170,21 @@ class EditProfileView:
         self._sync_model()
         
         if self.controller.error_message:
-            self.error_text.value = self.controller.error_message
-            self.page.update()
+            await self._show_snackbar(self.controller.error_message, is_error=True)
             return
 
         self.loader.visible = True
         self.page.update()
         
         success = await self.controller.save_profile(self.page, self.router)
-        if not success:
-            self.error_text.value = self.controller.error_message or "Error al guardar el perfil"
+        if success:
             self.loader.visible = False
-            self.page.update()
+            await self._show_snackbar(I18n.t("edit_profile.success"), is_error=False)
+            await asyncio.sleep(3)
+            self.router.navigate("/dashboard")
+        else:
+            self.loader.visible = False
+            await self._show_snackbar(self.controller.error_message or "Error al guardar el perfil", is_error=True)
 
     def render(self):
         # Professional Dashboard/Profile Background Pattern
@@ -264,6 +296,8 @@ class EditProfileView:
                     ),
                     expand=True,
                 ),
+                # SNACKBAR CONTAINER
+                self.snack_container,
             ],
             expand=True,
         )

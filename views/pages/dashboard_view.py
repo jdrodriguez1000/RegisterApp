@@ -149,7 +149,7 @@ class DashboardView:
                 alignment=ft.MainAxisAlignment.SPACE_EVENLY,
             ),
             bgcolor="#1A1A1A",
-            border_radius=ft.border_radius.only(top_left=24, top_right=24),
+            border_radius=ft.BorderRadius(top_left=24, top_right=24, bottom_left=0, bottom_right=0),
             padding=ft.Padding(0, 15, 0, 15),
             shadow=ft.BoxShadow(blur_radius=20, color="#33000000"),
             height=90,

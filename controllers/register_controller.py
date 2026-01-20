@@ -1,4 +1,5 @@
 from core.database import supabase
+from core.i18n import I18n
 import logging
 
 logger = logging.getLogger(__name__)
@@ -48,8 +49,8 @@ class RegisterController:
                 
         except Exception as e:
             logger.error(f"Registration error: {str(e)}")
-            # Handle specific Supabase errors if needed
-            self.model.error_message = str(e)
+            # Translate technical error to friendly message
+            self.model.error_message = I18n.parse_error(e)
             return False
         finally:
             self.model.is_loading = False

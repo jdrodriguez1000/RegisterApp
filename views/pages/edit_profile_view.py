@@ -72,10 +72,10 @@ class EditProfileView:
             m = self.controller.model
             self.name_text.value = m.full_name
             self.email_text.value = m.email
-            self.gender_dropdown.value = I18n.get_index_for_value("lists.genders", m.gender)
-            self.civil_status_dropdown.value = I18n.get_index_for_value("lists.civil_statuses", m.civil_status)
-            self.color_dropdown.value = I18n.get_index_for_value("lists.colors", m.favorite_color)
-            self.sport_dropdown.value = I18n.get_index_for_value("lists.sports", m.favorite_sport)
+            self.gender_dropdown.value = m.gender
+            self.civil_status_dropdown.value = m.civil_status
+            self.color_dropdown.value = m.favorite_color
+            self.sport_dropdown.value = m.favorite_sport
             
             if m.birth_date:
                 self.date_input.value = m.birth_date.strftime("%d/%m/%Y")

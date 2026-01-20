@@ -2,6 +2,7 @@ from models.user_profile import UserProfile
 from core.database import supabase
 from core.logger import get_logger
 from core.state import AppState
+from core.i18n import I18n
 from datetime import datetime
 
 logger = get_logger("ProfileController")
@@ -53,10 +54,10 @@ class ProfileController:
         
         # Profile table data
         if profile:
-            self.model.gender = profile.get("gender")
-            self.model.civil_status = profile.get("civil_status")
-            self.model.favorite_color = profile.get("favorite_color")
-            self.model.favorite_sport = profile.get("favorite_sport")
+            self.model.gender = I18n.get_index_for_value("lists.genders", profile.get("gender"))
+            self.model.civil_status = I18n.get_index_for_value("lists.civil_statuses", profile.get("civil_status"))
+            self.model.favorite_color = I18n.get_index_for_value("lists.colors", profile.get("favorite_color"))
+            self.model.favorite_sport = I18n.get_index_for_value("lists.sports", profile.get("favorite_sport"))
             
             # Parse date
             bdate = profile.get("birth_date")
@@ -110,7 +111,7 @@ class ProfileController:
 
         except Exception as e:
             logger.error(f"Error updating profile: {str(e)}")
-            self.error_message = f"Error al guardar el perfil: {str(e)}"
+            self.error_message = I18n.parse_error(e)
             self.is_loading = False
             page.update()
             return False

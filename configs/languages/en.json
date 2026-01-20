@@ -150,5 +150,16 @@
     "civil_status": "Please select your civil status.",
     "color": "Please select your favorite color.",
     "sport": "Please select your favorite sport."
+  },
+  "errors": {
+    "invalid_credentials": "The email or password is incorrect. Please check your credentials.",
+    "email_not_confirmed": "Your email address has not been confirmed yet. Please check your inbox.",
+    "user_exists": "An account with this email address already exists.",
+    "password_too_short": "The password is too short (minimum 6 characters).",
+    "network_error": "Could not connect to the server. Please check your internet connection.",
+    "too_many_requests": "Too many attempts. Please wait a moment.",
+    "server_error": "An unexpected server error occurred. Please try again later.",
+    "session_expired": "Your session has expired. Please log in again.",
+    "not_found": "The requested resource was not found."
   }
 }

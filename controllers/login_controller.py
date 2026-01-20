@@ -2,6 +2,7 @@ from models.login_model import LoginModel
 from core.logger import get_logger
 from core.database import supabase
 from core.state import AppState
+from core.i18n import I18n
 
 logger = get_logger("LoginController")
 
@@ -77,9 +78,7 @@ class LoginController:
 
         except Exception as e:
             logger.error(f"Login error: {str(e)}")
-            if "Invalid login credentials" in str(e):
-                self.model.error_message = "Credenciales incorrectas"
-            else:
-                self.model.error_message = f"Error: {str(e)}"
+            # Map technical error to localized message
+            self.model.error_message = I18n.parse_error(e)
             self.model.is_loading = False
             return None

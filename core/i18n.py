@@ -128,3 +128,31 @@ class I18n:
             except:
                 continue
         return None
+
+    @classmethod
+    def parse_error(cls, tech_error):
+        """
+        Maps technical server/auth errors to localized friendly messages.
+        Returns the translated string.
+        """
+        tech_error = str(tech_error).lower()
+        
+        # 1. Map typical technical patterns to translation keys
+        error_map = {
+            "invalid login credentials": "errors.invalid_credentials",
+            "email not confirmed": "errors.email_not_confirmed",
+            "user already registered": "errors.user_exists",
+            "password should be at least": "errors.password_too_short",
+            "network": "errors.network_error",
+            "too many requests": "errors.too_many_requests",
+            "session expired": "errors.session_expired",
+            "not found": "errors.not_found",
+        }
+
+        # 2. Find a match
+        for pattern, translate_key in error_map.items():
+            if pattern in tech_error:
+                return cls.t(translate_key)
+
+        # 3. Fallback: If no match, return a generic server error
+        return cls.t("errors.server_error")

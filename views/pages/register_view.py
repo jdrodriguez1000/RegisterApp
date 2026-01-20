@@ -3,6 +3,9 @@ from views.layouts.main_layout import MainLayout
 from controllers.register_controller import RegisterController
 from models.register_model import RegisterModel
 from core.i18n import I18n
+from views.components.custom_text_field import CustomTextField
+from views.components.primary_button import PrimaryButton
+from views.components.custom_snackbar import CustomSnackbar
 
 class RegisterView:
     def __init__(self, page, router):
@@ -11,84 +14,32 @@ class RegisterView:
         self.model = RegisterModel()
         self.controller = RegisterController(self.model)
         
-        # UI controls
-        self.name_input = ft.TextField(
+        # UI controls and Shared Components
+        self.name_input = CustomTextField(
             label=I18n.t("register.name_label"),
             hint_text="John Doe",
-            bgcolor="white",
-            border_radius=12,
-            border_color="#E0E0E0",
-            focused_border_color="#121212",
-            color="black",
-            label_style=ft.TextStyle(color="black", weight="bold"),
-            text_style=ft.TextStyle(color="black", weight="bold"),
-            cursor_color="black",
-            prefix=ft.Icon(ft.Icons.PERSON_OUTLINE, color="black"),
+            icon=ft.Icons.PERSON_OUTLINE,
         )
         
-        self.email_input = ft.TextField(
+        self.email_input = CustomTextField(
             label=I18n.t("register.email_label"),
             hint_text="example@email.com",
-            bgcolor="white",
-            border_radius=12,
-            border_color="#E0E0E0",
-            focused_border_color="#121212",
-            color="black",
-            label_style=ft.TextStyle(color="black", weight="bold"),
-            text_style=ft.TextStyle(color="black", weight="bold"),
-            cursor_color="black",
-            prefix=ft.Icon(ft.Icons.EMAIL_OUTLINED, color="black"),
+            icon=ft.Icons.EMAIL_OUTLINED,
             keyboard_type=ft.KeyboardType.EMAIL,
         )
         
-        self.password_input = ft.TextField(
+        self.password_input = CustomTextField(
             label=I18n.t("register.password_label"),
             password=True,
             can_reveal_password=True,
-            bgcolor="white",
-            border_radius=12,
-            border_color="#E0E0E0",
-            focused_border_color="#121212",
-            color="black",
-            label_style=ft.TextStyle(color="black", weight="bold"),
-            text_style=ft.TextStyle(color="black", weight="bold"),
-            cursor_color="black",
-            prefix=ft.Icon(ft.Icons.LOCK_OUTLINED, color="black"),
+            icon=ft.Icons.LOCK_OUTLINED,
         )
         
-        # self.error_text removed
-        
-        # Custom SnackBar controls
-        self.snack_text = ft.Text("", color="white", weight="bold")
-        self.snack_container = ft.Container(
-            content=self.snack_text,
-            bgcolor=ft.Colors.RED_400,
-            padding=15,
-            border_radius=12,
-            alignment=ft.Alignment(0, 0),
-            visible=False,
-            left=20,
-            right=20,
-            bottom=40,
-            shadow=ft.BoxShadow(blur_radius=15, color=ft.Colors.with_opacity(0.3, "black")),
-            animate_opacity=300,
+        self.snack = CustomSnackbar()
+        self.register_button = PrimaryButton(
+            text=I18n.t("register.register_button"),
+            on_click=self._on_register_click
         )
-
-    async def _show_snackbar(self, message, is_error=True):
-        self.snack_text.value = message
-        self.snack_container.bgcolor = ft.Colors.RED_400 if is_error else ft.Colors.GREEN_600
-        self.snack_container.visible = True
-        self.snack_container.opacity = 1
-        self.snack_container.update()
-        
-        # Hide after 3 seconds
-        import asyncio
-        await asyncio.sleep(3)
-        self.snack_container.opacity = 0
-        self.snack_container.update()
-        await asyncio.sleep(0.3)
-        self.snack_container.visible = False
-        self.snack_container.update()
 
     async def _on_register_click(self, e):
         success = await self.controller.handle_register(
@@ -102,9 +53,8 @@ class RegisterView:
             self.router.navigate("/verification-pending")
         else:
             msg = self.model.error_message or "Error desconocido"
-            # Translate if it's a key
             translated_msg = I18n.t(msg) if "." in msg else msg
-            await self._show_snackbar(translated_msg, is_error=True)
+            await self.snack.show(translated_msg, is_error=True)
 
     def render(self):
         # FORCE LIGHT MODE for this view to ensure input text is visible
@@ -160,22 +110,9 @@ class RegisterView:
                                         # error_text removed
                                         ft.Container(height=10),
                                         ft.Container(height=10),
+                                        ft.Container(height=10),
                                         # Register Button
-                                        ft.Button(
-                                            content=ft.Text(
-                                                I18n.t("register.register_button"),
-                                                color="white",
-                                                weight="bold",
-                                                size=16,
-                                            ),
-                                            style=ft.ButtonStyle(
-                                                bgcolor="#121212",
-                                                shape=ft.RoundedRectangleBorder(radius=12),
-                                                padding=ft.Padding(20, 20, 20, 20),
-                                            ),
-                                            on_click=self._on_register_click,
-                                            width=float("inf"),
-                                        ),
+                                        self.register_button,
                                         ft.Container(height=20),
                                         # Footer Link
                                         ft.Row(
@@ -215,8 +152,8 @@ class RegisterView:
                     ),
                     expand=True,
                 ),
-                # Custom SnackBar Control (Directly in Stack, invisible by default)
-                self.snack_container,
+                # Custom SnackBar Control
+                self.snack,
             ],
             expand=True,
         )

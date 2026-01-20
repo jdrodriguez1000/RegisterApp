@@ -3,6 +3,7 @@ from views.layouts.main_layout import MainLayout
 from controllers.welcome_controller import WelcomeController
 from models.welcome_model import WelcomeModel
 from core.i18n import I18n
+from views.components.primary_button import PrimaryButton
 
 class WelcomeView:
     def __init__(self, page, router):
@@ -54,20 +55,9 @@ class WelcomeView:
                             ft.Container(expand=True),
                             # BUTTON AREA
                             ft.Container(
-                                content=ft.Button(
-                                    content=ft.Text(
-                                        I18n.t("welcome.button"),
-                                        color="white",
-                                        weight="bold",
-                                        size=18,
-                                    ),
-                                    style=ft.ButtonStyle(
-                                        bgcolor="#121212",
-                                        shape=ft.RoundedRectangleBorder(radius=15),
-                                        padding=ft.Padding(25, 25, 25, 25),
-                                    ),
-                                    on_click=lambda _: self.router.navigate("/login"),
-                                    width=float("inf"),
+                                content=PrimaryButton(
+                                    text=I18n.t("welcome.button"),
+                                    on_click=lambda _: self.router.navigate("/login")
                                 ),
                                 margin=ft.Margin(30, 0, 30, 60),
                             ),

@@ -136,7 +136,28 @@ Allowing users to personalize the application language and managing dynamic list
 
 ---
 
-## Phase 10: Major Event - Password Recovery (External)
+## Phase 10: Major Event - Technical Debt Consolidation
+Refining the codebase for scalability, maintainability, and architectural consistency.
+
+### [Component] UI & Architecture
+#### [NEW] `views/components/`
+- **Deliverable**: Create a library of shared components (e.g., `CustomSnackbar`, `LoadingOverlay`, `StyledButton`) to eliminate duplication in View files.
+#### [MODIFY] `core/state.py`
+- **Deliverable**: Enhance the Global State manager to cache user profile and session data, minimizing redundant remote API calls.
+#### [NEW] `configs/theme.py`
+- **Deliverable**: Extract all hardcoded colors, shadows, and typography styles into a centralized design system configuration.
+
+### [Component] Data & UX
+#### [MODIFY] `core/error_handler.py` & `configs/languages/`
+- **Deliverable**: Implement a mapping system that translates technical server errors (Supabase/Auth) into user-friendly localized messages.
+#### [DATA] Database Normalization
+- **Deliverable**: Ensure all "list" data (Gender, Color, etc.) is stored as indices/keys in the database, and run a cleanup if necessary to remove literal strings.
+#### [MODIFY] `core/router.py`
+- **Deliverable**: Secure the navigation stack to handle edge cases in "back" actions and ensure mandatory flows cannot be bypassed via hardware back buttons.
+
+---
+
+## Phase 11: Major Event - Password Recovery (External)
 Helping users regain access when they forget their password.
 
 ### [Component] Recovery Flow
@@ -145,7 +166,7 @@ Helping users regain access when they forget their password.
 
 ---
 
-## Phase 11: Major Event - Final Application Testing
+## Phase 12: Major Event - Final Application Testing
 End-to-end validation of the complete system.
 
 ### [Component] Testing & QA
@@ -164,5 +185,6 @@ End-to-end validation of the complete system.
 2. **Phase 7**: Verify successful password change and rejection of incorrect "current password".
 3. **Phase 8**: Verify profile updates reflect in Dashboard and Database.
 4. **Phase 9**: Verify language switch changes UI text immediately and persists on reload.
-5. **Phase 10**: Verify recovery email is received and the link allows setting a new password.
-6. **Phase 11**: Final E2E test suite.
+5. **Phase 10**: Verify that UI remains consistent after refactoring and database calls are reduced.
+6. **Phase 11**: Verify recovery email is received and the link allows setting a new password.
+7. **Phase 12**: Final E2E test suite.

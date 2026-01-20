@@ -3,6 +3,9 @@ from views.layouts.main_layout import MainLayout
 from controllers.login_controller import LoginController
 from models.login_model import LoginModel
 from core.i18n import I18n
+from views.components.custom_text_field import CustomTextField
+from views.components.primary_button import PrimaryButton
+from views.components.custom_snackbar import CustomSnackbar
 
 class LoginView:
     def __init__(self, page, router):
@@ -12,55 +15,25 @@ class LoginView:
         self.controller = LoginController(self.model)
         
         # UI controls that need references
-        self.email_input = ft.TextField(
+        self.email_input = CustomTextField(
             label=I18n.t("login.email_label"),
             hint_text="example@email.com",
-            bgcolor="white",
-            border_radius=12,
-            border_color="#1A1A1A",
-            focused_border_color="black",
-            color="black",
-            cursor_color="black",
-            label_style=ft.TextStyle(color="black", weight=ft.FontWeight.W_500),
-            hint_style=ft.TextStyle(color="#BCBCBC"),
-            text_style=ft.TextStyle(color="black"),
-            prefix=ft.Icon(ft.Icons.EMAIL_OUTLINED, color="black"),
+            icon=ft.Icons.EMAIL_OUTLINED,
             keyboard_type=ft.KeyboardType.EMAIL,
         )
         
-        self.password_input = ft.TextField(
+        self.password_input = CustomTextField(
             label=I18n.t("login.password_label"),
             password=True,
             can_reveal_password=True,
-            bgcolor="white",
-            border_radius=12,
-            border_color="#1A1A1A",
-            focused_border_color="black",
-            color="black",
-            cursor_color="black",
-            label_style=ft.TextStyle(color="black", weight=ft.FontWeight.W_500),
-            hint_style=ft.TextStyle(color="#BCBCBC"),
-            text_style=ft.TextStyle(color="black"),
-            prefix=ft.Icon(ft.Icons.LOCK_OUTLINED, color="black"),
+            icon=ft.Icons.LOCK_OUTLINED,
         )
         
-        
-        # self.error_text removed
-        
-        # Custom SnackBar controls
-        self.snack_text = ft.Text("", color="white")
-        self.snack_container = ft.Container(
-            content=self.snack_text,
-            bgcolor=ft.Colors.ERROR,
-            padding=15,
-            border_radius=10,
-            alignment=ft.Alignment(0, 0),
-            visible=False,
-            # Positioning for direct usage in Stack
-            left=20,
-            right=20,
-            bottom=20,
-            shadow=ft.BoxShadow(blur_radius=10, color=ft.Colors.with_opacity(0.3, "black")),
+        # Custom Shared Components
+        self.snack = CustomSnackbar()
+        self.login_button = PrimaryButton(
+            text=I18n.t("login.login_button"),
+            on_click=self._on_login_click
         )
 
     async def _on_login_click(self, e):
@@ -73,17 +46,7 @@ class LoginView:
         if route:
             self.router.navigate(route)
         else:
-            # Show Custom SnackBar
-            print(f"DEBUG: Showing Custom SnackBar with error: {self.controller.model.error_message}")
-            self.snack_text.value = self.controller.model.error_message or "Error desconocido"
-            self.snack_container.visible = True
-            self.snack_container.update()
-            
-            # Hide after 3 seconds
-            import asyncio
-            await asyncio.sleep(3)
-            self.snack_container.visible = False
-            self.snack_container.update()
+            await self.snack.show(self.controller.model.error_message or "Error desconocido")
 
     def render(self):
         self.page.theme_mode = ft.ThemeMode.LIGHT
@@ -148,21 +111,7 @@ class LoginView:
                                         # Error text removed
                                         ft.Container(height=10),
                                         # Login Button
-                                        ft.Button(
-                                            content=ft.Text(
-                                                I18n.t("login.login_button"),
-                                                color="white",
-                                                weight="bold",
-                                                size=16,
-                                            ),
-                                            style=ft.ButtonStyle(
-                                                bgcolor="#121212",
-                                                shape=ft.RoundedRectangleBorder(radius=12),
-                                                padding=ft.Padding(20, 20, 20, 20),
-                                            ),
-                                            on_click=self._on_login_click,
-                                            width=float("inf"),
-                                        ),
+                                        self.login_button,
                                         ft.Container(height=20),
                                         # Footer Link
                                         ft.Row(
@@ -206,8 +155,7 @@ class LoginView:
                     expand=True,
                 ),
                 # Custom SnackBar Overlay
-                # Custom SnackBar Control (Directly in Stack, invisible by default)
-                self.snack_container,
+                self.snack,
             ],
             expand=True,
         )

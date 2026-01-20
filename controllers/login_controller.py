@@ -1,6 +1,7 @@
 from models.login_model import LoginModel
 from core.logger import get_logger
 from core.database import supabase
+from core.state import AppState
 
 logger = get_logger("LoginController")
 
@@ -26,6 +27,9 @@ class LoginController:
             self.model.error_message = validation_error
             self.model.is_loading = False
             return None
+
+        # 1. OPTIMIZATION: Clear old cache before new login
+        AppState.clear_cache()
 
         try:
             logger.info(f"Attempting login for: {email}")
@@ -56,6 +60,10 @@ class LoginController:
                 required_fields = ["gender", "birth_date", "civil_status", "favorite_color", "favorite_sport"]
                 
                 is_complete = all(profile.get(field) for field in required_fields)
+                
+                # 3. OPTIMIZATION: Seed the Global Cache
+                # Since we already fetched the user and profile, store them!
+                AppState.set_user_cache(user, profile)
                 
                 if not is_complete:
                     logger.info("Profile incomplete. Redirecting to completion.")

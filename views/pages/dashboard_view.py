@@ -3,6 +3,8 @@ from views.layouts.main_layout import MainLayout
 from controllers.dashboard_controller import DashboardController
 from models.dashboard_model import DashboardModel
 from core.i18n import I18n
+from core.state import AppState
+from core.database import supabase
 
 class DashboardView:
     def __init__(self, page, router):
@@ -144,7 +146,7 @@ class DashboardView:
                     self._build_nav_item(ft.Icons.LANGUAGE, I18n.t("dashboard.nav.language"), "/settings/language"),
                     self._build_nav_item(ft.Icons.LOCK, I18n.t("dashboard.nav.security"), "/change-password"),
                     self._build_nav_item(ft.Icons.EDIT, I18n.t("dashboard.nav.profile"), "/edit-profile"), 
-                    self._build_nav_item(ft.Icons.LOGOUT, I18n.t("dashboard.nav.logout"), "/login", color="#FF453A"),
+                    self._build_nav_item(ft.Icons.LOGOUT, I18n.t("dashboard.nav.logout"), None, color="#FF453A", on_click=self._on_logout_click),
                 ],
                 alignment=ft.MainAxisAlignment.SPACE_EVENLY,
             ),
@@ -179,7 +181,22 @@ class DashboardView:
             show_bottom_bar=False, 
         )
 
-    def _build_nav_item(self, icon, label, route, color="white"):
+    async def _on_logout_click(self, e):
+        """Clears all session data and redirects to login."""
+        # 1. Clear Global Cache
+        AppState.clear_cache()
+        # 2. Supabase Logout
+        try:
+            supabase.auth.sign_out()
+        except:
+            pass
+        # 3. Navigate
+        self.router.navigate("/login")
+
+    def _build_nav_item(self, icon, label, route, color="white", on_click=None):
+        """Builds a navigation item for the bottom bar."""
+        click_handler = on_click if on_click else lambda _: self.router.navigate(route)
+        
         return ft.Container(
             content=ft.Column(
                 controls=[
@@ -190,7 +207,7 @@ class DashboardView:
                 alignment=ft.MainAxisAlignment.CENTER,
                 horizontal_alignment=ft.CrossAxisAlignment.CENTER,
             ),
-            on_click=lambda _: self.router.navigate(route),
+            on_click=click_handler,
             padding=5,
             border_radius=8,
             ink=True,

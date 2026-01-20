@@ -88,5 +88,21 @@
     "error_mismatch": "New passwords do not match",
     "error_current_wrong": "Current password is incorrect",
     "error_same_as_old": "New password cannot be the same as the old one"
+  },
+  "profile": {
+    "gender_label": "Gender",
+    "birth_date_label": "Birth Date",
+    "civil_status_label": "Civil Status",
+    "favorite_color_label": "Favorite Color",
+    "favorite_sport_label": "Favorite Sport",
+    "birth_date_hint": "DD/MM/YYYY",
+    "error_date_format": "Invalid date format. Use DD/MM/YYYY"
+  },
+  "edit_profile": {
+    "title": "Edit Profile",
+    "subtitle": "Update your personal information",
+    "save_button": "Save Changes",
+    "success": "Profile updated successfully",
+    "error_loading": "Error loading profile"
   }
 }

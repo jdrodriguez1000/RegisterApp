@@ -10,6 +10,35 @@ class ProfileController:
         self.error_message = None
         self.is_loading = False
 
+    async def get_profile(self):
+        self.is_loading = True
+        try:
+            user_response = supabase.auth.get_user()
+            if not user_response or not user_response.user:
+                return False
+                
+            user_id = user_response.user.id
+            response = supabase.table("profiles").select("*").eq("id", user_id).single().execute()
+            
+            if response.data:
+                data = response.data
+                self.model.gender = data.get("gender")
+                self.model.civil_status = data.get("civil_status")
+                self.model.favorite_color = data.get("favorite_color")
+                self.model.favorite_sport = data.get("favorite_sport")
+                
+                # Parse date
+                bdate = data.get("birth_date")
+                if bdate:
+                    self.model.birth_date = datetime.strptime(bdate, "%Y-%m-%d")
+                
+                return True
+        except Exception as e:
+            logger.error(f"Error fetching profile: {str(e)}")
+            return False
+        finally:
+            self.is_loading = False
+
     async def save_profile(self, page, router):
         self.is_loading = True
         page.update()
@@ -43,15 +72,12 @@ class ProfileController:
             logger.info(f"Updating profile for user {user_id}: {data}")
 
             # Update profile in Supabase
-            response = supabase.table("profiles").update(data).eq("id", user_id).execute()
-            
-            # Check if successful (Supabase-py usually raises error or returns data)
-            # If we are here, it likely succeeded.
+            supabase.table("profiles").update(data).eq("id", user_id).execute()
             
             logger.info("Profile updated successfully")
             
-            # Navigate to Construction Page as per Phase 5 instructions (Dashboard is next phase)
-            router.navigate("/construction")
+            # Navigate to Dashboard
+            router.navigate("/dashboard")
             return True
 
         except Exception as e:

@@ -88,5 +88,21 @@
     "error_mismatch": "Las nuevas contraseñas no coinciden",
     "error_current_wrong": "La contraseña actual es incorrecta",
     "error_same_as_old": "La nueva contraseña no puede ser igual a la anterior"
+  },
+  "profile": {
+    "gender_label": "Género",
+    "birth_date_label": "Fecha de Nacimiento",
+    "civil_status_label": "Estado Civil",
+    "favorite_color_label": "Color Favorito",
+    "favorite_sport_label": "Deporte Favorito",
+    "birth_date_hint": "DD/MM/AAAA",
+    "error_date_format": "Formato de fecha inválido. Usa DD/MM/AAAA"
+  },
+  "edit_profile": {
+    "title": "Editar Perfil",
+    "subtitle": "Actualiza tu información personal",
+    "save_button": "Guardar Cambios",
+    "success": "Perfil actualizado correctamente",
+    "error_loading": "Error al cargar el perfil"
   }
 }

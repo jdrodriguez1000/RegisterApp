@@ -82,6 +82,14 @@ ROUTES = [
         "icon": ft.Icons.LOCK,
         "show_in_top": False,
         "show_in_bottom": False,
+    },
+    {
+        "path": "/edit-profile",
+        "view": "views.pages.edit_profile_view.EditProfileView",
+        "label": "edit_profile.title",
+        "icon": ft.Icons.EDIT,
+        "show_in_top": False,
+        "show_in_bottom": False,
     }
 ]
 
